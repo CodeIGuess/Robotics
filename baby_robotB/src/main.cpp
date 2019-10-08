@@ -35,10 +35,10 @@ void usercontrol( void ) {
     float Axis4 = Controller1.Axis4.value();
 
     front_left.spin(directionType::fwd, Axis3 + Axis1 - Axis4, velocityUnits::pct);
-    back_left.spin(directionType::fwd, Axis3 + Axis1 + Axis4, velocityUnits::pct);
+    back_left.spin(directionType::fwd, Axis3 + Axis1 - Axis4, velocityUnits::pct);
 
     front_right.spin(directionType::fwd, Axis3 - Axis1 + Axis4, velocityUnits::pct);
-    back_right.spin(directionType::fwd, Axis3 - Axis1 - Axis4, velocityUnits::pct);
+    back_right.spin(directionType::fwd, Axis3 - Axis1 + Axis4, velocityUnits::pct);
 
     if(Controller1.ButtonA.pressing()){
 
