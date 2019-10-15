@@ -1,10 +1,21 @@
 using namespace vex;
 
-vex::brain Brain;
+extern brain Brain;
 
-vex::controller Controller1 = vex::controller();
+// VEXcode devices
+extern motor front_right;
+extern motor front_left;
+extern motor back_left;
+extern motor back_right;
+extern controller Controller1;
+extern motor left_intake;
+extern motor right_intake;
+extern motor arm_right;
+extern motor arm_left;
 
-vex::motor front_right     (vex::PORT11, vex::gearSetting::ratio18_1, true);
-vex::motor front_left    (vex::PORT20, vex::gearSetting::ratio18_1, false);
-vex::motor back_right    (vex::PORT1, vex::gearSetting::ratio18_1, true);
-vex::motor back_left    (vex::PORT10, vex::gearSetting::ratio18_1, false);
+/**
+ * Used to initialize code/tasks/devices added using tools in VEXcode Text.
+ * 
+ * This should be called at the start of your int main function.
+ */
+void  vexcodeInit( void );
