@@ -27,6 +27,7 @@ signature Vision__SIG_6 = signature (6, 0, 0, 0, 0, 0, 0, 2.5, 0);
 signature Vision__SIG_7 = signature (7, 0, 0, 0, 0, 0, 0, 2.5, 0);
 vision Vision = vision (PORT13, 50, Vision__ORANGE_CUBE, Vision__GREEN_CUBE, Vision__PURPLE_CUBE, Vision__SIG_4, Vision__SIG_5, Vision__SIG_6, Vision__SIG_7);
 /*vex-vision-config:end*/
+pot Potentiometer = pot(Brain.ThreeWirePort.A);
 
 // VEXcode generated functions
 
