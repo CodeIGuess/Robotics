@@ -10,6 +10,34 @@
 // right_intake         motor         12              
 // arm_right            motor         5               
 // arm_left             motor         6               
+// Vision               vision        13              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// front_right          motor         11              
+// front_left           motor         20              
+// back_left            motor         10              
+// back_right           motor         1               
+// Controller1          controller                    
+// left_intake          motor         19              
+// right_intake         motor         12              
+// arm_right            motor         5               
+// arm_left             motor         6               
+// Vision13             vision        13              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// front_right          motor         11              
+// front_left           motor         20              
+// back_left            motor         10              
+// back_right           motor         1               
+// Controller1          controller                    
+// left_intake          motor         19              
+// right_intake         motor         12              
+// arm_right            motor         5               
+// arm_left             motor         6               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
