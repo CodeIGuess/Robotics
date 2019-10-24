@@ -23,6 +23,7 @@ extern signature Vision__SIG_6;
 extern signature Vision__SIG_7;
 extern vision Vision;
 extern pot Potentiometer;
+extern sonar Ultrasonic;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Text.

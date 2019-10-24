@@ -119,46 +119,25 @@ void stoptake() {
   right_intake.stop();
 }
 
+event checkPurple = event();
+
+void hasPurpleCallback() {
+	Brain.Screen.setFont(mono40);
+	Brain.Screen.clearLine(1, purple);
+	Brain.Screen.setCursor(Brain.Screen.row(), 1);
+	Brain.Screen.setCursor(1, 1);
+	Vision.takeSnapshot(Vision__PURPLE_CUBE);
+	if(Vision.objectCount > 0) {
+		Brain.Screen.print("CUBE CUBE CUBE PURPLE YES GOOD");
+	} else {
+		Brain.Screen.print("No cube");
+	}
+}
 
 void autonomous( void ) {
+  /*
 
-  basevelocity(100);
-  left_intake.setVelocity(100, percent);
-  right_intake.setVelocity(100, percent);
-  arm_left.setVelocity(65, percent);
-  arm_right.setVelocity(65, percent);
-
-  //up();
-  
-  //intake();
-  //task::sleep(2000);
-  //stoptake();
-  
-  //task::sleep(100);
-  
-  //front_left.spin(reverse);
-  //back_left.spin(reverse);
-  //front_right.spin(reverse);
-  //back_right.spin(reverse);
-  
-  task::sleep(100);
-
-  front_left.spin(forward);
-  back_left.spin(forward);
-  front_right.spin(forward);
-  back_right.spin(forward);
-
-  task::sleep(1500);
-
-  front_left.spin(reverse);
-  back_left.spin(reverse);
-  front_right.spin(reverse);
-  back_right.spin(reverse);
-
-  //outtake();
-  task::sleep(2000);
-  //stoptake();
-
+  */
 }
 
 void usercontrol( void ) {
@@ -168,6 +147,12 @@ void usercontrol( void ) {
     float Axis2 = -Controller1.Axis2.value();
     float Axis3 = -Controller1.Axis3.value();
     float Axis4 = -Controller1.Axis4.value();
+
+    if(Controller1.ButtonB.pressing()){
+      Brain.Screen.clearScreen();
+      Brain.Screen.setCursor(1,1);
+      Brain.Screen.print("%.2f", Potentiometer.angle());
+    }
 
     front_left.setVelocity(100, percent);
     back_right.setVelocity(100, percent);
