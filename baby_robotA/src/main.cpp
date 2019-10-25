@@ -63,16 +63,18 @@ void down(){
 }
 
 void intake(){
-  left_intake.spin(reverse);
-  right_intake.spin(reverse);
-}
-void outtake(){
   left_intake.spin(forward);
   right_intake.spin(forward);
 }
+void outtake(){
+  left_intake.spin(reverse);
+  right_intake.spin(reverse);
+}
 void stoptake() {
-  left_intake.stop();
-  right_intake.stop();
+  left_intake.setVelocity(10, percent);
+  right_intake.setVelocity(10, percent);
+  left_intake.spin(forward);
+  right_intake.spin(forward);
 }
 
 event checkPurple = event();
@@ -84,7 +86,7 @@ void hasPurpleCallback() {
 	Brain.Screen.setCursor(1, 1);
 	Vision.takeSnapshot(Vision__PURPLE_CUBE);
 	if(Vision.objectCount > 0) {
-		Brain.Screen.print("CUBE CUBE CUBE PURPLE YES GOOD MAKES ME HARD");
+		Brain.Screen.print("CUBE CUBE CUBE PURPLE YES GOOD");
 	} else {
 		Brain.Screen.print("No cube");
 	}
@@ -98,6 +100,8 @@ void autonomous( void ) {
 
 void usercontrol( void ) {
   while (1) {
+
+    Brain.Screen.print("I WORK, MOTHERFUCKERS!");
     
     float Axis1 = -Controller1.Axis1.value();
     float Axis2 = -Controller1.Axis2.value();
@@ -124,19 +128,17 @@ void usercontrol( void ) {
     
     if(Controller1.ButtonL2.pressing()) {up();}
     else if (Controller1.ButtonL1.pressing()) {down();}
-    else {
-      arms.stop();
-    }
+    else {arms.stop();}
     
     left_intake.setVelocity(100, percent);
     right_intake.setVelocity(100, percent);
 
-    if(Controller1.ButtonR2.pressing()) {intake();}
-    else if (Controller1.ButtonR1.pressing()) {outtake();}
+    if(Controller1.ButtonR2.pressing()) {outtake();}
+    else if (Controller1.ButtonR1.pressing()) {intake();}
     else {stoptake();}
 
     
-    if(Controller1.ButtonA.pressing()){Controller1.Screen.print("Brain A Is Woking");}
+    if(Controller1.ButtonA.pressing()){Controller1.Screen.print("Brain Works ;)");}
 
     //ramp.setVelocity(100, percent);
     //  ramp.spinFor(Axis2, degrees);
@@ -160,6 +162,6 @@ int main() {
     //Prevent main from exiting with an infinite loop.                        
     while(1) {
       task::sleep(100);//Sleep the task for a short amount of time to prevent wasted resources.
-    }    
+    }
        
 }
