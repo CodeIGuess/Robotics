@@ -8,15 +8,14 @@ using code = vision::code;
 brain  Brain;
 
 // VEXcode device constructors
-motor front_right = motor(PORT11, ratio18_1, false);
-motor front_left = motor(PORT20, ratio18_1, true);
-motor back_left = motor(PORT10, ratio18_1, true);
-motor back_right = motor(PORT1, ratio18_1, false);
+motor front_right = motor(PORT1, ratio18_1, false);
+motor front_left = motor(PORT8, ratio18_1, true);
+motor back_left = motor(PORT9, ratio18_1, true);
+motor back_right = motor(PORT2, ratio18_1, false);
 controller Controller1 = controller(primary);
-motor left_intake = motor(PORT19, ratio18_1, false);
-motor right_intake = motor(PORT12, ratio18_1, true);
-motor arm_right = motor(PORT5, ratio18_1, true);
-motor arm_left = motor(PORT6, ratio18_1, false);
+motor left_intake = motor(PORT3, ratio18_1, false);
+motor right_intake = motor(PORT7, ratio18_1, true);
+motor arms = motor(PORT14, ratio18_1, true);
 /*vex-vision-config:begin*/
 signature Vision__ORANGE_CUBE = signature (1, 5231, 7655, 6443, -1505, -525, -1015, 4.2, 0);
 signature Vision__GREEN_CUBE = signature (2, -7495, -5101, -6298, -4927, -2581, -3754, 3.1, 0);
@@ -29,6 +28,7 @@ vision Vision = vision (PORT13, 50, Vision__ORANGE_CUBE, Vision__GREEN_CUBE, Vis
 /*vex-vision-config:end*/
 pot Potentiometer = pot(Brain.ThreeWirePort.A);
 sonar Ultrasonic = sonar(Brain.ThreeWirePort.C);
+motor ramp = motor(PORT10, ratio18_1, false);
 
 // VEXcode generated functions
 

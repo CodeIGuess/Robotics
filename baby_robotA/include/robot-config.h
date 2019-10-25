@@ -12,8 +12,7 @@ extern motor back_right;
 extern controller Controller1;
 extern motor left_intake;
 extern motor right_intake;
-extern motor arm_right;
-extern motor arm_left;
+extern motor arms;
 extern signature Vision__ORANGE_CUBE;
 extern signature Vision__GREEN_CUBE;
 extern signature Vision__PURPLE_CUBE;
@@ -24,6 +23,7 @@ extern signature Vision__SIG_7;
 extern vision Vision;
 extern pot Potentiometer;
 extern sonar Ultrasonic;
+extern motor ramp;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Text.
