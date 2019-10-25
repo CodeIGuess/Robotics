@@ -1,224 +1,6 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
-// front_right          motor         1               
-// front_left           motor         8               
-// back_left            motor         9               
-// back_right           motor         2               
-// Controller1          controller                    
-// left_intake          motor         3               
-// right_intake         motor         7               
-// arms                 motor         14              
-// Vision               vision        13              
-// Potentiometer        pot           A               
-// Ultrasonic           sonar         C, D            
-// ramp                 motor         10              
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// front_right          motor         1               
-// front_left           motor         8               
-// back_left            motor         9               
-// back_right           motor         2               
-// Controller1          controller                    
-// left_intake          motor         3               
-// right_intake         motor         7               
-// arms                 motor         14              
-// Vision               vision        13              
-// Potentiometer        pot           A               
-// Ultrasonic           sonar         C, D            
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// front_right          motor         1               
-// front_left           motor         8               
-// back_left            motor         9               
-// back_right           motor         2               
-// Controller1          controller                    
-// left_intake          motor         3               
-// right_intake         motor         7               
-// arms                 motor         14              
-// arm_left             motor         6               
-// Vision               vision        13              
-// Potentiometer        pot           A               
-// Ultrasonic           sonar         C, D            
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// front_right          motor         1               
-// front_left           motor         8               
-// back_left            motor         9               
-// back_right           motor         2               
-// Controller1          controller                    
-// left_intake          motor         3               
-// right_intake         motor         7               
-// arm_right            motor         14              
-// arm_left             motor         6               
-// Vision               vision        13              
-// Potentiometer        pot           A               
-// Ultrasonic           sonar         C, D            
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// front_right          motor         1               
-// front_left           motor         8               
-// back_left            motor         9               
-// back_right           motor         2               
-// Controller1          controller                    
-// left_intake          motor         3               
-// right_intake         motor         7               
-// arm_right            motor         5               
-// arm_left             motor         6               
-// Vision               vision        13              
-// Potentiometer        pot           A               
-// Ultrasonic           sonar         C, D            
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// front_right          motor         1               
-// front_left           motor         8               
-// back_left            motor         10              
-// back_right           motor         2               
-// Controller1          controller                    
-// left_intake          motor         3               
-// right_intake         motor         7               
-// arm_right            motor         5               
-// arm_left             motor         6               
-// Vision               vision        13              
-// Potentiometer        pot           A               
-// Ultrasonic           sonar         C, D            
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// front_right          motor         1               
-// front_left           motor         20              
-// back_left            motor         10              
-// back_right           motor         2               
-// Controller1          controller                    
-// left_intake          motor         3               
-// right_intake         motor         7               
-// arm_right            motor         5               
-// arm_left             motor         6               
-// Vision               vision        13              
-// Potentiometer        pot           A               
-// Ultrasonic           sonar         C, D            
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// front_right          motor         1               
-// front_left           motor         20              
-// back_left            motor         10              
-// back_right           motor         2               
-// Controller1          controller                    
-// left_intake          motor         3               
-// right_intake         motor         12              
-// arm_right            motor         5               
-// arm_left             motor         6               
-// Vision               vision        13              
-// Potentiometer        pot           A               
-// Ultrasonic           sonar         C, D            
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// front_right          motor         1               
-// front_left           motor         20              
-// back_left            motor         10              
-// back_right           motor         2               
-// Controller1          controller                    
-// left_intake          motor         19              
-// right_intake         motor         12              
-// arm_right            motor         5               
-// arm_left             motor         6               
-// Vision               vision        13              
-// Potentiometer        pot           A               
-// Ultrasonic           sonar         C, D            
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// front_right          motor         1               
-// front_left           motor         20              
-// back_left            motor         10              
-// back_right           motor         21              
-// Controller1          controller                    
-// left_intake          motor         19              
-// right_intake         motor         12              
-// arm_right            motor         5               
-// arm_left             motor         6               
-// Vision               vision        13              
-// Potentiometer        pot           A               
-// Ultrasonic           sonar         C, D            
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// front_right          motor         11              
-// front_left           motor         20              
-// back_left            motor         10              
-// back_right           motor         21              
-// Controller1          controller                    
-// left_intake          motor         19              
-// right_intake         motor         12              
-// arm_right            motor         5               
-// arm_left             motor         6               
-// Vision               vision        13              
-// Potentiometer        pot           A               
-// Ultrasonic           sonar         C, D            
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// front_right          motor         11              
-// front_left           motor         20              
-// back_left            motor         10              
-// back_right           motor         1               
-// Controller1          controller                    
-// left_intake          motor         19              
-// right_intake         motor         12              
-// arm_right            motor         5               
-// arm_left             motor         6               
-// Vision               vision        13              
-// Potentiometer        pot           A               
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// front_right          motor         11              
-// front_left           motor         20              
-// back_left            motor         10              
-// back_right           motor         1               
-// Controller1          controller                    
-// left_intake          motor         19              
-// right_intake         motor         12              
-// arm_right            motor         5               
-// arm_left             motor         6               
-// Vision               vision        13              
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// front_right          motor         11              
-// front_left           motor         20              
-// back_left            motor         10              
-// back_right           motor         1               
-// Controller1          controller                    
-// left_intake          motor         19              
-// right_intake         motor         12              
-// arm_right            motor         5               
-// arm_left             motor         6               
-// Vision13             vision        13              
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
 // front_right          motor         11              
 // front_left           motor         20              
 // back_left            motor         10              
@@ -248,12 +30,6 @@ competition Competition;
 void pre_auton( void ) {
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
-  
-}
-
-void  rampUp() {
-  ramp.setVelocity(100, percent);
-  ramp.spinFor(10, degrees);
 }
 
 void turnFor(double n) {
@@ -321,12 +97,11 @@ void autonomous( void ) {
 }
 
 void usercontrol( void ) {
-  rampUp();
   while (1) {
     
     float Axis1 = -Controller1.Axis1.value();
     float Axis2 = -Controller1.Axis2.value();
-    float Axis3 = Controller1.Axis3.value();
+    float Axis3 =  Controller1.Axis3.value();
     float Axis4 = -Controller1.Axis4.value();
 
     if(Controller1.ButtonB.pressing()){
@@ -346,8 +121,7 @@ void usercontrol( void ) {
 
     front_right.spin(directionType::fwd, Axis3 - Axis1, velocityUnits::pct);
     back_right.spin(directionType::fwd, Axis3 - Axis1, velocityUnits::pct);
-// gamer moment
-//b ruh
+    
     if(Controller1.ButtonL2.pressing()) {up();}
     else if (Controller1.ButtonL1.pressing()) {down();}
     else {
@@ -362,12 +136,10 @@ void usercontrol( void ) {
     else {stoptake();}
 
     
-    if(Controller1.ButtonA.pressing()){
+    if(Controller1.ButtonA.pressing()){Controller1.Screen.print("Brain A Is Woking");}
 
-      Controller1.Screen.print("Brain A Is Woking");
-      rampUp();
-
-    }
+    //ramp.setVelocity(100, percent);
+    //  ramp.spinFor(Axis2, degrees);
 
     task::sleep(20);
   }
