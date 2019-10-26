@@ -167,10 +167,12 @@ void usercontrol( void ) {
     float Axis3 =  Controller1.Axis3.value();
     float Axis4 = -Controller1.Axis4.value();
 
-    front_left.setVelocity(100, percent);
-    back_right.setVelocity(100, percent);
-    back_left.setVelocity(100, percent);
-    front_right.setVelocity(100, percent);
+    double vel = 100 * (2/3);
+
+    front_left.setVelocity(vel, percent);
+    back_right.setVelocity(vel, percent);
+    back_left.setVelocity(vel, percent);
+    front_right.setVelocity(vel, percent);
 
 
     front_left.spin(directionType::fwd, Axis3 + Axis1, velocityUnits::pct);
