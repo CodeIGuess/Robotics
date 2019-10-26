@@ -153,12 +153,24 @@ void hasPurpleCallback() {
 
 void autonomous( void ) {
 
+  intake();
+  
   goForward(5);
+
+  task::sleep(100);
+
+  goForward(-5);
+
+
+
+
 
 }
 
 void usercontrol( void ) {
   while (1) {
+    
+    intake();
 
     Brain.Screen.print("I AM WORKING YEEEEEEEEE!");
     
