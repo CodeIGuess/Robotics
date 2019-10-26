@@ -65,12 +65,16 @@ void pre_auton( void ) {
 }
 
 void rampUp() {
-  ramp.spinFor(1, degrees);
+  ramp.spinFor(100, degrees);
+  Controller1.Screen.clearLine();
+  Controller1.Screen.print("UP");
 }
 void rampDown() {
-  if( Potentiometer.angle(degrees) > 10 ) {
-    ramp.spinFor(-1, degrees);
-  }
+  //if( Potentiometer.angle(degrees) > 10 ) {
+  ramp.spinFor(-100, degrees);
+  //}
+  Controller1.Screen.clearLine();
+  Controller1.Screen.print("DOWN");
 }
 void rampStop() {
   ramp.spinFor(0, degrees);
@@ -115,8 +119,8 @@ void outtake(){
   right_intake.spin(reverse);
 }
 void stoptake() {
-  left_intake.setVelocity(10, percent);
-  right_intake.setVelocity(10, percent);
+  left_intake.setVelocity(15, percent);
+  right_intake.setVelocity(15, percent);
   left_intake.spin(forward);
   right_intake.spin(forward);
 }
@@ -176,14 +180,16 @@ void usercontrol( void ) {
     else {stoptake();}
 
     if(Controller1.ButtonB.pressing()){
-    Controller1.Screen.clearLine();
-    Controller1.Screen.print(round(Potentiometer.angle(degrees)*1.005)-1);
+      Controller1.Screen.clearLine();
+      Controller1.Screen.print(round(Potentiometer.angle(degrees)*1.005)-1);
     }
 
     ramp.setVelocity(100, percent);
 
     if(Controller1.ButtonUp.pressing()){rampUp();}
     if(Controller1.ButtonDown.pressing()){rampDown();} //*/
+
+    //ramp.spinFor(Axis2, degrees);
 
     //ramp.spinFor(Axis2, degrees);
 
