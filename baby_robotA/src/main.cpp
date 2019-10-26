@@ -138,6 +138,8 @@ void hasPurpleCallback() {
 
 void autonomous( void ) {
 
+
+
 }
 
 void usercontrol( void ) {
@@ -149,12 +151,6 @@ void usercontrol( void ) {
     float Axis2 = -Controller1.Axis2.value();
     float Axis3 =  Controller1.Axis3.value();
     float Axis4 = -Controller1.Axis4.value();
-
-    if(Controller1.ButtonB.pressing()){
-      Brain.Screen.clearScreen();
-      Brain.Screen.setCursor(1,1);
-      Brain.Screen.print("%.2f", Potentiometer.angle());
-    }
 
     front_left.setVelocity(100, percent);
     back_right.setVelocity(100, percent);
@@ -179,9 +175,10 @@ void usercontrol( void ) {
     else if (Controller1.ButtonR1.pressing()) {intake();}
     else {stoptake();}
 
-    
+    if(Controller1.ButtonB.pressing()){
     Controller1.Screen.clearLine();
     Controller1.Screen.print(round(Potentiometer.angle(degrees)*1.005)-1);
+    }
 
     ramp.setVelocity(100, percent);
 
