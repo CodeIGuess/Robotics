@@ -68,7 +68,9 @@ void rampUp() {
   ramp.spinFor(1, degrees);
 }
 void rampDown() {
-  ramp.spinFor(-1, degrees);
+  if( Potentiometer.angle(degrees) > 10 ) {
+    ramp.spinFor(-1, degrees);
+  }
 }
 void rampStop() {
   ramp.spinFor(0, degrees);
@@ -180,10 +182,8 @@ void usercontrol( void ) {
     else {stoptake();}
 
     
-    if(Controller1.ButtonA.pressing()){
-      Controller1.Screen.clearScreen();
-      Controller1.Screen.print(Potentiometer.angle(degrees));
-    }
+    Controller1.Screen.clearLine();
+    Controller1.Screen.print(round(Potentiometer.angle(degrees)*1.005)-1);
 
     ramp.setVelocity(100, percent);
 
