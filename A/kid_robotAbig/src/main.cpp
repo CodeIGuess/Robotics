@@ -33,6 +33,22 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
+// front_right          motor         1               
+// front_left           motor         8               
+// back_left            motor         9               
+// back_right           motor         2               
+// Controller1          controller                    
+// left_intake          motor         3               
+// right_intake         motor         7               
+// arms                 motor         14              
+// Vision               vision        13              
+// Potentiometer        pot           A               
+// Ultrasonic           sonar         C, D            
+// ramp                 motor         10              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
 // front_right          motor         11              
 // front_left           motor         20              
 // back_left            motor         10              
@@ -64,20 +80,15 @@ void pre_auton( void ) {
   // Example: clearing encoders, setting servo positions, ...
 }
 
-void rampUp() {
-  ramp.spinFor(100, degrees);
-  Controller1.Screen.clearLine();
-  Controller1.Screen.print("UP");
+void rampUp(){
+  ramp.spin(forward);
 }
-void rampDown() {
-  //if( Potentiometer.angle(degrees) > 10 ) {
-  ramp.spinFor(-100, degrees);
-  //}
-  Controller1.Screen.clearLine();
-  Controller1.Screen.print("DOWN");
+void rampDown(){
+  ramp.spin(reverse);
 }
 void rampStop() {
-  ramp.spinFor(0, degrees);
+  ramp.setVelocity(0, percent);
+  ramp.spin(forward);
 }
 
 void turnFor(double n) {
@@ -119,8 +130,8 @@ void outtake(){
   right_intake.spin(reverse);
 }
 void stoptake() {
-  left_intake.setVelocity(15, percent);
-  right_intake.setVelocity(15, percent);
+  left_intake.setVelocity(0, percent);
+  right_intake.setVelocity(0, percent);
   left_intake.spin(forward);
   right_intake.spin(forward);
 }
@@ -142,7 +153,7 @@ void hasPurpleCallback() {
 
 void autonomous( void ) {
 
-  
+
 
 }
 
@@ -156,10 +167,12 @@ void usercontrol( void ) {
     float Axis3 =  Controller1.Axis3.value();
     float Axis4 = -Controller1.Axis4.value();
 
-    front_left.setVelocity(100, percent);
-    back_right.setVelocity(100, percent);
-    back_left.setVelocity(100, percent);
-    front_right.setVelocity(100, percent);
+    double vel = 100 * (2/3);
+
+    front_left.setVelocity(vel, percent);
+    back_right.setVelocity(vel, percent);
+    back_left.setVelocity(vel, percent);
+    front_right.setVelocity(vel, percent);
 
 
     front_left.spin(directionType::fwd, Axis3 + Axis1, velocityUnits::pct);
@@ -185,13 +198,16 @@ void usercontrol( void ) {
     }
 
     ramp.setVelocity(100, percent);
-
     if(Controller1.ButtonUp.pressing()){rampUp();}
-    if(Controller1.ButtonDown.pressing()){rampDown();} //*/
-
+    else if(Controller1.ButtonDown.pressing()){rampDown();}
+    else{rampStop();}
     //ramp.spinFor(Axis2, degrees);
 
     //ramp.spinFor(Axis2, degrees);
+
+    Controller1.Screen.clearScreen();
+    Controller1.Screen.setCursor(1,1);
+    Controller1.Screen.print(Axis2);
 
     task::sleep(20);
   }
