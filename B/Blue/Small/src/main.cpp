@@ -153,7 +153,7 @@ void hasPurpleCallback() {
 
 void autonomous( void ) {
 
-
+  goForward(5);
 
 }
 
