@@ -64,20 +64,15 @@ void pre_auton( void ) {
   // Example: clearing encoders, setting servo positions, ...
 }
 
-void rampUp() {
-  ramp.spinFor(100, degrees);
-  Controller1.Screen.clearLine();
-  Controller1.Screen.print("UP");
+void rampUp(){
+  ramp.spin(forward);
 }
-void rampDown() {
-  //if( Potentiometer.angle(degrees) > 10 ) {
-  ramp.spinFor(-100, degrees);
-  //}
-  Controller1.Screen.clearLine();
-  Controller1.Screen.print("DOWN");
+void rampDown(){
+  ramp.spin(reverse);
 }
 void rampStop() {
-  ramp.spinFor(0, degrees);
+  ramp.setVelocity(0, percent);
+  ramp.spin(forward);
 }
 
 void turnFor(double n) {
@@ -119,8 +114,8 @@ void outtake(){
   right_intake.spin(reverse);
 }
 void stoptake() {
-  left_intake.setVelocity(15, percent);
-  right_intake.setVelocity(15, percent);
+  left_intake.setVelocity(0, percent);
+  right_intake.setVelocity(0, percent);
   left_intake.spin(forward);
   right_intake.spin(forward);
 }
@@ -185,13 +180,16 @@ void usercontrol( void ) {
     }
 
     ramp.setVelocity(100, percent);
-
     if(Controller1.ButtonUp.pressing()){rampUp();}
-    if(Controller1.ButtonDown.pressing()){rampDown();} //*/
-
+    else if(Controller1.ButtonDown.pressing()){rampDown();}
+    else{rampStop();}
     //ramp.spinFor(Axis2, degrees);
 
     //ramp.spinFor(Axis2, degrees);
+
+    Controller1.Screen.clearScreen();
+    Controller1.Screen.setCursor(1,1);
+    Controller1.Screen.print(Axis2);
 
     task::sleep(20);
   }

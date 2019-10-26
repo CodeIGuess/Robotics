@@ -28,7 +28,7 @@ vision Vision = vision (PORT13, 50, Vision__ORANGE_CUBE, Vision__GREEN_CUBE, Vis
 /*vex-vision-config:end*/
 pot Potentiometer = pot(Brain.ThreeWirePort.A);
 sonar Ultrasonic = sonar(Brain.ThreeWirePort.C);
-motor ramp = motor(PORT10, ratio18_1, false);
+motor ramp = motor(PORT10, ratio18_1, true);
 
 // VEXcode generated functions
 
