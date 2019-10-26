@@ -160,10 +160,8 @@ void autonomous( void ) {
   task::sleep(100);
 
   goForward(-5);
-
-
-
-
+  
+  
 
 }
 
