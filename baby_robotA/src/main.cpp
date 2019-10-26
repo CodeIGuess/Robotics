@@ -1,6 +1,38 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
+// front_right          motor         1               
+// front_left           motor         8               
+// back_left            motor         9               
+// back_right           motor         2               
+// Controller1          controller                    
+// left_intake          motor         3               
+// right_intake         motor         7               
+// arms                 motor         14              
+// Vision               vision        13              
+// Potentiometer        pot           A               
+// Ultrasonic           sonar         C, D            
+// ramp                 motor         10              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// front_right          motor         1               
+// front_left           motor         8               
+// back_left            motor         9               
+// back_right           motor         2               
+// Controller1          controller                    
+// left_intake          motor         3               
+// right_intake         motor         7               
+// arms                 motor         14              
+// Vision               vision        13              
+// Potentiometer        pot           A               
+// Ultrasonic           sonar         C, D            
+// ramp                 motor         10              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
 // front_right          motor         11              
 // front_left           motor         20              
 // back_left            motor         10              
@@ -30,6 +62,16 @@ competition Competition;
 void pre_auton( void ) {
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
+}
+
+void rampUp() {
+  ramp.spinFor(1, degrees);
+}
+void rampDown() {
+  ramp.spinFor(-1, degrees);
+}
+void rampStop() {
+  ramp.spinFor(0, degrees);
 }
 
 void turnFor(double n) {
@@ -138,10 +180,17 @@ void usercontrol( void ) {
     else {stoptake();}
 
     
-    if(Controller1.ButtonA.pressing()){Controller1.Screen.print("Brain Works ;)");}
+    if(Controller1.ButtonA.pressing()){
+      Controller1.Screen.clearScreen();
+      Controller1.Screen.print(Potentiometer.angle(degrees));
+    }
 
-    //ramp.setVelocity(100, percent);
-    //  ramp.spinFor(Axis2, degrees);
+    ramp.setVelocity(100, percent);
+
+    if(Controller1.ButtonUp.pressing()){rampUp();}
+    if(Controller1.ButtonDown.pressing()){rampDown();} //*/
+
+    //ramp.spinFor(Axis2, degrees);
 
     task::sleep(20);
   }
