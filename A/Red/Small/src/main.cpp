@@ -124,16 +124,25 @@ void down(){
 void intake(){
   left_intake.spin(forward);
   right_intake.spin(forward);
+  Controller1.Screen.clearLine();
+  Controller1.Screen.setCursor(1,1);
+  Controller1.Screen.print("IN");
 }
 void outtake(){
   left_intake.spin(reverse);
   right_intake.spin(reverse);
+  Controller1.Screen.clearLine();
+  Controller1.Screen.setCursor(1,1);
+  Controller1.Screen.print("OT");
 }
 void stoptake() {
-  left_intake.setVelocity(15, percent);
-  right_intake.setVelocity(15, percent);
+  left_intake.setVelocity(0, percent);
+  right_intake.setVelocity(0, percent);
   left_intake.spin(forward);
   right_intake.spin(forward);
+  Controller1.Screen.clearLine();
+  Controller1.Screen.setCursor(1,1);
+  Controller1.Screen.print("NE");
 }
 
 event checkPurple = event();
@@ -152,15 +161,30 @@ void hasPurpleCallback() {
 }
 
 void autonomous( void ) {
+  double vel = 100*0.75;
 
+  front_left.setVelocity(vel, percent);
+  back_right.setVelocity(vel, percent);
+  back_left.setVelocity(vel, percent);
+  front_right.setVelocity(vel, percent);
 
+  front_left.spin(forward);
+  front_right.spin(forward);
+  back_left.spin(forward);
+  back_right.spin(forward);
 
+  vex::task::sleep(3500);
+
+  front_left.spin(reverse);
+  front_right.spin(reverse);
+  back_left.spin(reverse);
+  back_right.spin(reverse);
+
+  vex::task::sleep(3000);
 }
 
 void usercontrol( void ) {
   while (1) {
-
-    stoptake();
 
     Brain.Screen.print("I AM WORKING YEEEEEEEEE!");
     
@@ -169,7 +193,7 @@ void usercontrol( void ) {
     float Axis3 =  Controller1.Axis3.value();
     float Axis4 = -Controller1.Axis4.value();
 
-    double vel = 100 * (2/3);
+    double vel = 100;
 
     front_left.setVelocity(vel, percent);
     back_right.setVelocity(vel, percent);
@@ -189,7 +213,6 @@ void usercontrol( void ) {
     
     left_intake.setVelocity(100, percent);
     right_intake.setVelocity(100, percent);
-
     if(Controller1.ButtonR2.pressing()) {outtake();}
     else if (Controller1.ButtonR1.pressing()) {intake();}
     else {stoptake();}
@@ -207,9 +230,9 @@ void usercontrol( void ) {
 
     //ramp.spinFor(Axis2, degrees);
 
-    Controller1.Screen.clearScreen();
-    Controller1.Screen.setCursor(1,1);
-    Controller1.Screen.print(Axis2);
+    //Controller1.Screen.clearScreen();
+    //Controller1.Screen.setCursor(1,1);
+    //Controller1.Screen.print(Axis2);
 
     task::sleep(20);
   }
