@@ -130,8 +130,8 @@ void outtake(){
   right_intake.spin(reverse);
 }
 void stoptake() {
-  left_intake.setVelocity(0, percent);
-  right_intake.setVelocity(0, percent);
+  left_intake.setVelocity(15, percent);
+  right_intake.setVelocity(15, percent);
   left_intake.spin(forward);
   right_intake.spin(forward);
 }
@@ -160,7 +160,7 @@ void autonomous( void ) {
 void usercontrol( void ) {
   while (1) {
 
-    intake();
+    stoptake();
 
     Brain.Screen.print("I AM WORKING YEEEEEEEEE!");
     
