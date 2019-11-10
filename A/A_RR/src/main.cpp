@@ -30,6 +30,7 @@ competition Competition;
 // Base Variables
 int speedBase = 85;
 int speed = speedBase;
+int speedWave = 0;
 
 // Distance Variables
 float rotations = 360;
@@ -235,10 +236,16 @@ void usercontrol()
     float Axis3 =  Controller1.Axis3.value();
     float Axis4 = -Controller1.Axis4.value();
 
-    front_left.setVelocity(speed, percent);
-    back_right.setVelocity(speed, percent);
-    back_left.setVelocity(speed, percent);
-    front_right.setVelocity(speed, percent);
+    if (abs(Axis3) > 0 && speedWave < 100) {
+      speedWave += 2;
+    } else {
+      speedWave -= 2;
+    }
+
+    front_left.setVelocity(speedWave, percent);
+    back_right.setVelocity(speedWave, percent);
+    back_left.setVelocity(speedWave, percent);
+    front_right.setVelocity(speedWave, percent);
 
 
     front_left.spin(directionType::fwd, Axis3 + Axis1, velocityUnits::pct);
