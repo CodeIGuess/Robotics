@@ -27,95 +27,115 @@ using namespace vex;
 
 competition Competition;
 
-float speedWave = 0;
-   
-void pre_auton( void ) {
-  // All activities that occur before the competition starts
-  // Example: clearing encoders, setting servo positions, ...
-}
+// Base Variables
+int speedBase = 85;
+int speed = speedBase;
 
-void rampUp(){
-  ramp.spin(forward);
-}
-void rampDown(){
-  ramp.spin(reverse);
-}
-void rampStop() {
-  ramp.setVelocity(0, percent);
-  ramp.spin(forward);
-}
+// Distance Variables
+float rotations = 360;
+double first_tile = rotations*2.08;
+double one_tile = rotations*2.32; 
 
-void turnFor(double n) {
+// Base Movement
+void basevelocity(double n)
+{
+  front_left.setVelocity(n, percent);
+  front_right.setVelocity(n, percent);
+  back_right.setVelocity(n, percent);
+  back_left.setVelocity(n, percent);
+}
+void GO(double n)
+{
+  front_right.spinFor(n, turns);
+  back_right.spinFor(n, turns);
+  front_left.spinFor(n, turns);
+  back_left.spinFor(n, turns);
+}
+void turnfor(double n) 
+{
   front_right.spinFor(n, degrees);
   back_right.spinFor(n, degrees);
   front_left.spinFor(-n, degrees);
   back_left.spinFor(-n, degrees);
 }
 
-void basevelocity(double n){
-  front_left.setVelocity(n, percent);
-  front_right.setVelocity(n, percent);
-  back_right.setVelocity(n, percent);
-  back_left.setVelocity(n, percent);
+// Distance Movement
+void move_firsttile(double t)
+{
+  front_right.spinFor(first_tile*t, deg);
+  back_right.spinFor(first_tile*t, deg);
+  front_left.spinFor(first_tile*t, deg);
+  back_left.spinFor(first_tile*t, deg);
+}
+void move_onetile(double t)
+{
+  front_right.spinFor(one_tile*t, deg);
+  back_right.spinFor(one_tile*t, deg);
+  front_left.spinFor(one_tile*t, deg);
+  back_left.spinFor(one_tile*t, deg);
 }
 
-void goForward(double n) {
-  front_right.spinFor(n, turns);
-  back_right.spinFor(n, turns);
-  front_left.spinFor(n, turns);
-  back_left.spinFor(n, turns);
+// Ramp Movement
+void rampUp()
+{
+  ramp.spin(forward);
+}
+void rampDown()
+{
+  ramp.spin(reverse);
+}
+void rampStop() 
+{
+  ramp.setVelocity(0, percent);
+  ramp.spin(forward);
 }
 
-void up() {
-  arms.setVelocity(50,percent);
-  arms.spin(reverse);
-}
-void down(){
+// Arms Movement
+void up()
+{
   arms.setVelocity(100,percent);
   arms.spin(forward);
 }
+void down()
+{
+  arms.setVelocity(50,percent);
+  arms.spin(reverse);
+}
 
-void intake(){
+// Intake Movement
+void intake()
+{
   left_intake.spin(forward);
   right_intake.spin(forward);
-  Controller1.Screen.clearScreen();
+  Controller1.Screen.clearLine();
   Controller1.Screen.setCursor(1,1);
   Controller1.Screen.print("IN");
 }
-void outtake(){
+void outtake()
+{
   left_intake.spin(reverse);
   right_intake.spin(reverse);
-  Controller1.Screen.clearScreen();
+  Controller1.Screen.clearLine();
   Controller1.Screen.setCursor(1,1);
   Controller1.Screen.print("OT");
 }
-void stoptake() {
+void stoptake()
+{
   left_intake.setVelocity(0, percent);
   right_intake.setVelocity(0, percent);
   left_intake.spin(forward);
   right_intake.spin(forward);
-  Controller1.Screen.clearScreen();
+  Controller1.Screen.clearLine();
   Controller1.Screen.setCursor(1,1);
   Controller1.Screen.print("NE");
 }
 
-event checkPurple = event();
+void pre_auton()
+{
+  // WE USE THIS SECTION FOR TRASHED AUTONS / EXPERIMENTAL STUFF =>
 
-void hasPurpleCallback() {
-	Brain.Screen.setFont(mono40);
-	Brain.Screen.clearLine(1, purple);
-	Brain.Screen.setCursor(Brain.Screen.row(), 1);
-	Brain.Screen.setCursor(1, 1);
-	Vision.takeSnapshot(Vision__PURPLE_CUBE);
-	if(Vision.objectCount > 0) {
-		Brain.Screen.print("CUBE CUBE CUBE PURPLE YES GOOD");
-	} else {
-		Brain.Screen.print("No cube");
-	}
-}
-
-void autonomous( void ) {
-  double vel = 100 * 75;  
+  /* Go Forward Auton (safe 1 point)
+  double vel = 100*0.75;
 
   front_left.setVelocity(vel, percent);
   back_right.setVelocity(vel, percent);
@@ -134,25 +154,91 @@ void autonomous( void ) {
   back_left.spin(reverse);
   back_right.spin(reverse);
 
-  vex::task::sleep(3000);
+  vex::task::sleep(3000);*/
+
+
+  /* Vision Sensor checking for color
+  event checkPurple = event();
+
+  void hasPurpleCallback()
+  {
+	  Brain.Screen.setFont(mono40);
+	  Brain.Screen.clearLine(1, purple);
+	  Brain.Screen.setCursor(Brain.Screen.row(), 1);
+	  Brain.Screen.setCursor(1, 1);
+	  Vision.takeSnapshot(Vision__PURPLE_CUBE);
+	  if(Vision.objectCount > 0) {
+		  Brain.Screen.print("CUBE CUBE CUBE PURPLE YES GOOD");
+	  } else {
+		  Brain.Screen.print("No cube");
+	  }
+  }*/
 }
 
-void usercontrol( void ) {
+void autonomous()
+{
+  // !!!!THIS AUTON HAS NOT BEEN TESTED!!!!
+
+  // 1 tile movement is 2.32 rotations
+  // The first tile movement is 2.08 rotations
+  // To change amount of tiles moved, t (the amount of tiles you want to move) will be multiplied by 2.32 or 2.08
+
+  // Set Base Velocity 75%
+  basevelocity(75);
+  Controller1.Screen.clearLine();
+  Controller1.Screen.setCursor(1,1);
+  Controller1.Screen.print("75% Velocity");
+
+  // Move to put block in square & back
+  move_onetile(1);
+  move_onetile(-1);
+  Controller1.Screen.clearLine();
+  Controller1.Screen.setCursor(1,1);
+  Controller1.Screen.print("Forward & Back");
+
+  // Turn 90 degrees to look at 4 blocks | wall safety | lift arms
+  turnfor(-90);
+  GO(-0.5);
+  arms.spin(forward);
+
+  vex::task::sleep(2000); // Arms spin for 2 seconds
+
+  arms.spin(reverse);
+
+  vex::task::sleep(2000);
+  Controller1.Screen.clearLine();
+  Controller1.Screen.setCursor(1,1);
+  Controller1.Screen.print("Prepare Intake");
+
+  // Go forward and intake 4 blocks | Go back for safety at slow speed
+  intake();
+  move_firsttile(1);
+  move_onetile(1);
+
+  vex::task::sleep(100);
+
+  basevelocity(30);
+  move_onetile(-1);
+  Controller1.Screen.clearLine();
+  Controller1.Screen.setCursor(1,1);
+  Controller1.Screen.print("Auton Finished");
+}
+
+void usercontrol() 
+{
   while (1) {
 
-    Brain.Screen.print("I AM WORKING YEEEEEEEEE!");
+    //Brain.Screen.print("I AM WORKING YEEEEEEEEE!");
     
     float Axis1 = -Controller1.Axis1.value();
     float Axis2 = -Controller1.Axis2.value();
-    float Axis3 = -Controller1.Axis3.value();
+    float Axis3 =  Controller1.Axis3.value();
     float Axis4 = -Controller1.Axis4.value();
 
-    double vel = 100;
-
-    front_left.setVelocity(vel, percent);
-    back_right.setVelocity(vel, percent);
-    back_left.setVelocity(vel, percent);
-    front_right.setVelocity(vel, percent);
+    front_left.setVelocity(speed, percent);
+    back_right.setVelocity(speed, percent);
+    back_left.setVelocity(speed, percent);
+    front_right.setVelocity(speed, percent);
 
 
     front_left.spin(directionType::fwd, Axis3 + Axis1, velocityUnits::pct);
@@ -167,34 +253,29 @@ void usercontrol( void ) {
     
     left_intake.setVelocity(100, percent);
     right_intake.setVelocity(100, percent);
-
     if(Controller1.ButtonR2.pressing()) {outtake();}
     else if (Controller1.ButtonR1.pressing()) {intake();}
     else {stoptake();}
-
-    if(Controller1.ButtonB.pressing()){
-      Controller1.Screen.clearLine();
-      Controller1.Screen.print(round(Potentiometer.angle(degrees)*1.005)-1);
-    }
 
     ramp.setVelocity(100, percent);
     if(Controller1.ButtonUp.pressing()){rampUp();}
     else if(Controller1.ButtonDown.pressing()){rampDown();}
     else{rampStop();}
-    //ramp.spinFor(Axis2, degrees);
 
-    //ramp.spinFor(Axis2, degrees);
-
-    //Controller1.Screen.clearScreen();
-    //Controller1.Screen.setCursor(1,1);
-    //Controller1.Screen.print(Axis2);
+    if (Controller1.ButtonB.pressing()) {
+      Controller1.Screen.clearLine();
+      Controller1.Screen.print(round(Potentiometer.angle(degrees)*1.005)-1);
+    }
+    if (Controller1.ButtonA.pressing()) {
+      speed = 100;
+    } else {
+      speed = speedBase;
+    }
 
     task::sleep(20);
   }
 }
-//
-// Main will set up the competition functions and callbacks.
-//
+
 int main() {
 
     vexcodeInit();
