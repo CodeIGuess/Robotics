@@ -1,6 +1,87 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
+// front_right          motor         1               
+// front_left           motor         8               
+// back_left            motor         9               
+// back_right           motor         2               
+// Controller1          controller                    
+// left_intake          motor         3               
+// right_intake         motor         7               
+// arms                 motor         14              
+// ramp                 motor         10              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// front_right          motor         1               
+// front_left           motor         8               
+// back_left            motor         9               
+// back_right           motor         2               
+// Controller1          controller                    
+// left_intake          motor         3               
+// right_intake         motor         7               
+// arms                 motor         14              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// front_right          motor         1               
+// front_left           motor         8               
+// back_left            motor         9               
+// back_right           motor         2               
+// Controller1          controller                    
+// left_intake          motor         3               
+// right_intake         motor         7               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// front_right          motor         1               
+// front_left           motor         8               
+// back_left            motor         9               
+// back_right           motor         2               
+// Controller1          controller                    
+// left_intake          motor         3               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// front_right          motor         1               
+// front_left           motor         8               
+// back_left            motor         9               
+// back_right           motor         2               
+// Controller1          controller                    
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// front_right          motor         1               
+// front_left           motor         8               
+// back_left            motor         9               
+// back_right           motor         2               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// front_right          motor         1               
+// front_left           motor         8               
+// back_left            motor         9               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// front_right          motor         1               
+// front_left           motor         8               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// front_right          motor         1               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
 // front_right          motor         11              
 // front_left           motor         20              
 // back_left            motor         10              
@@ -30,6 +111,7 @@ competition Competition;
 // Base Variables
 int speedBase = 85;
 int speed = speedBase;
+int speedWave = 0;
 
 // Distance Variables
 float rotations = 360;
@@ -264,7 +346,7 @@ void usercontrol()
 
     if (Controller1.ButtonB.pressing()) {
       Controller1.Screen.clearLine();
-      Controller1.Screen.print(round(Potentiometer.angle(degrees)*1.005)-1);
+      //Controller1.Screen.print(round(Potentiometer.angle(degrees)*1.005)-1);
     }
     if (Controller1.ButtonA.pressing()) {
       speed = 100;

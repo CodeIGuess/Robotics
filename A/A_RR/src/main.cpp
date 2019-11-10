@@ -28,9 +28,8 @@ using namespace vex;
 competition Competition;
 
 // Base Variables
-int speedBase = 85;
+int speedBase = 60;
 int speed = speedBase;
-int speedWave = 0;
 
 // Distance Variables
 float rotations = 360;
@@ -47,33 +46,33 @@ void basevelocity(double n)
 }
 void GO(double n)
 {
-  front_right.spinFor(n, turns);
-  back_right.spinFor(n, turns);
-  front_left.spinFor(n, turns);
-  back_left.spinFor(n, turns);
+  front_right.rotateFor(n, turns, false);
+  back_right.rotateFor(n, turns, false);
+  front_left.rotateFor(n, turns, false);
+  back_left.rotateFor(n, turns);
 }
 void turnfor(double n) 
 {
-  front_right.spinFor(n, degrees);
-  back_right.spinFor(n, degrees);
-  front_left.spinFor(-n, degrees);
+  front_right.spinFor(n, degrees, false);
+  back_right.spinFor(n, degrees, false);
+  front_left.spinFor(-n, degrees, false);
   back_left.spinFor(-n, degrees);
 }
 
 // Distance Movement
 void move_firsttile(double t)
 {
-  front_right.spinFor(first_tile*t, deg);
-  back_right.spinFor(first_tile*t, deg);
-  front_left.spinFor(first_tile*t, deg);
-  back_left.spinFor(first_tile*t, deg);
+  front_right.rotateFor(first_tile*t, deg, false);
+  back_right.rotateFor(first_tile*t, deg, false);
+  front_left.rotateFor(first_tile*t, deg, false);
+  back_left.rotateFor(first_tile*t, deg);
 }
 void move_onetile(double t)
 {
-  front_right.spinFor(one_tile*t, deg);
-  back_right.spinFor(one_tile*t, deg);
-  front_left.spinFor(one_tile*t, deg);
-  back_left.spinFor(one_tile*t, deg);
+  front_right.rotateFor(one_tile*t, deg, false);
+  back_right.rotateFor(one_tile*t, deg, false);
+  front_left.rotateFor(one_tile*t, deg, false);
+  back_left.rotateFor(one_tile*t, deg);
 }
 
 // Ramp Movement
@@ -185,7 +184,7 @@ void autonomous()
   // To change amount of tiles moved, t (the amount of tiles you want to move) will be multiplied by 2.32 or 2.08
 
   // Set Base Velocity 75%
-  basevelocity(75);
+  /*basevelocity(60);
   Controller1.Screen.clearLine();
   Controller1.Screen.setCursor(1,1);
   Controller1.Screen.print("75% Velocity");
@@ -198,31 +197,58 @@ void autonomous()
   Controller1.Screen.print("Forward & Back");
 
   // Turn 90 degrees to look at 4 blocks | wall safety | lift arms
-  turnfor(90);
-  GO(-0.5);
+  turnfor(360);
+  GO(-0.5);*/
+  ramp.setVelocity(100, percent);
+
+  arms.setVelocity(100, percent);
   arms.spin(forward);
 
-  vex::task::sleep(2000); // Arms spin for 2 seconds
-
+  vex::task::sleep(2500); // Arms spin for 2 seconds
   arms.spin(reverse);
 
-  vex::task::sleep(2000);
+  vex::task::sleep(1000);
+  arms.stop();
+
   Controller1.Screen.clearLine();
   Controller1.Screen.setCursor(1,1);
   Controller1.Screen.print("Prepare Intake");
 
   // Go forward and intake 4 blocks | Go back for safety at slow speed
+  basevelocity(55);
+  left_intake.setVelocity(100, percent);
+  right_intake.setVelocity(100, percent);
   intake();
   move_firsttile(1);
   move_onetile(1);
 
   vex::task::sleep(100);
 
-  basevelocity(30);
-  move_onetile(-1);
+  basevelocity(50);
+  move_onetile(-1.8);
+  stoptake();
   Controller1.Screen.clearLine();
   Controller1.Screen.setCursor(1,1);
-  Controller1.Screen.print("Auton Finished");
+  Controller1.Screen.print("Got ~4 blocks");
+
+  // Turn and put blocks
+  turnfor(365);
+  move_onetile(0.8);
+
+  ramp.setVelocity(80, percent);
+  rampDown();
+  vex::task::sleep(1800);
+  rampStop();
+
+  vex::task::sleep(200);
+
+  left_intake.setVelocity(20, percent);
+  right_intake.setVelocity(20, percent);
+  outtake();
+
+  basevelocity(30);
+  move_onetile(-1);
+
 }
 
 void usercontrol() 
@@ -236,16 +262,10 @@ void usercontrol()
     float Axis3 =  Controller1.Axis3.value();
     float Axis4 = -Controller1.Axis4.value();
 
-    if (abs(Axis3) > 0 && speedWave < 100) {
-      speedWave += 2;
-    } else {
-      speedWave -= 2;
-    }
-
-    front_left.setVelocity(speedWave, percent);
-    back_right.setVelocity(speedWave, percent);
-    back_left.setVelocity(speedWave, percent);
-    front_right.setVelocity(speedWave, percent);
+    front_left.setVelocity(speed, percent);
+    back_right.setVelocity(speed, percent);
+    back_left.setVelocity(speed, percent);
+    front_right.setVelocity(speed, percent);
 
 
     front_left.spin(directionType::fwd, Axis3 + Axis1, velocityUnits::pct);
@@ -254,8 +274,8 @@ void usercontrol()
     front_right.spin(directionType::fwd, Axis3 - Axis1, velocityUnits::pct);
     back_right.spin(directionType::fwd, Axis3 - Axis1, velocityUnits::pct);
     
-    if(Controller1.ButtonL2.pressing()) {up();}
-    else if (Controller1.ButtonL1.pressing()) {down();}
+    if(Controller1.ButtonL1.pressing()) {up();}
+    else if (Controller1.ButtonL2.pressing()) {down();}
     else {arms.stop();}
     
     left_intake.setVelocity(100, percent);

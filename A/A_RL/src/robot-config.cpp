@@ -15,6 +15,8 @@ motor back_left = motor(PORT9, ratio18_1, true);
 motor back_right = motor(PORT2, ratio18_1, false);
 motor right_intake = motor(PORT7, ratio18_1, true);
 motor left_intake = motor(PORT3, ratio18_1, false);
+motor ramp = motor(PORT10, ratio18_1, false);
+motor arms = motor(PORT14, ratio18_1, false);
 
 // VEXcode generated functions
 

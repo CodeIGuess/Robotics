@@ -46,10 +46,10 @@ void basevelocity(double n)
 }
 void GO(double n)
 {
-  front_right.spinFor(n, turns);
-  back_right.spinFor(n, turns);
-  front_left.spinFor(n, turns);
-  back_left.spinFor(n, turns);
+  front_right.rotateFor(n, turns, false);
+  back_right.rotateFor(n, turns, false);
+  front_left.rotateFor(n, turns, false);
+  back_left.rotateFor(n, turns);
 }
 void turnfor(double n) 
 {
@@ -62,17 +62,17 @@ void turnfor(double n)
 // Distance Movement
 void move_firsttile(double t)
 {
-  front_right.spinFor(first_tile*t, deg);
-  back_right.spinFor(first_tile*t, deg);
-  front_left.spinFor(first_tile*t, deg);
-  back_left.spinFor(first_tile*t, deg);
+  front_right.rotateFor(first_tile*t, deg, false);
+  back_right.rotateFor(first_tile*t, deg, false);
+  front_left.rotateFor(first_tile*t, deg, false);
+  back_left.rotateFor(first_tile*t, deg);
 }
 void move_onetile(double t)
 {
-  front_right.spinFor(one_tile*t, deg);
-  back_right.spinFor(one_tile*t, deg);
-  front_left.spinFor(one_tile*t, deg);
-  back_left.spinFor(one_tile*t, deg);
+  front_right.rotateFor(one_tile*t, deg, false);
+  back_right.rotateFor(one_tile*t, deg, false);
+  front_left.rotateFor(one_tile*t, deg, false);
+  back_left.rotateFor(one_tile*t, deg);
 }
 
 // Ramp Movement
@@ -235,11 +235,16 @@ void usercontrol()
     float Axis3 =  Controller1.Axis3.value();
     float Axis4 = -Controller1.Axis4.value();
 
-    front_left.setVelocity(speed, percent);
-    back_right.setVelocity(speed, percent);
-    back_left.setVelocity(speed, percent);
-    front_right.setVelocity(speed, percent);
+    if (abs(Axis3) > 0 && speedWave < 100) {
+      speedWave += 2;
+    } else {
+      speedWave -= ((speedWave > 0) ? 2 : 0);
+    }
 
+    front_left.setVelocity(speedWave, percent);
+    back_right.setVelocity(speedWave, percent);
+    back_left.setVelocity(speedWave, percent);
+    front_right.setVelocity(speedWave, percent);
 
     front_left.spin(directionType::fwd, Axis3 + Axis1, velocityUnits::pct);
     back_left.spin(directionType::fwd, Axis3 + Axis1, velocityUnits::pct);
