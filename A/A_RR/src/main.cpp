@@ -74,6 +74,20 @@ void move_onetile(double t)
   front_left.rotateFor(one_tile*t, deg, false);
   back_left.rotateFor(one_tile*t, deg);
 }
+void move_onetiletime(double t) // Uses millisecond
+{
+  front_right.spin(forward);
+  back_right.spin(forward);
+  front_left.spin(forward);
+  back_left.spin(forward);
+
+  vex::task::sleep(t);
+
+  front_right.stop();
+  back_right.stop();
+  front_left.stop();
+  back_left.stop();
+}
 
 // Ramp Movement
 void rampUp()
@@ -220,24 +234,30 @@ void autonomous()
   right_intake.setVelocity(100, percent);
   intake();
   move_firsttile(1);
-  move_onetile(1);
+  move_onetile(1.2);
 
   vex::task::sleep(100);
 
   basevelocity(50);
-  move_onetile(-1.8);
-  stoptake();
+  move_onetile(-2.1);
   Controller1.Screen.clearLine();
   Controller1.Screen.setCursor(1,1);
   Controller1.Screen.print("Got ~4 blocks");
 
+  move_onetile(0.5);
+
   // Turn and put blocks
-  turnfor(365);
-  move_onetile(0.8);
+  left_intake.setVelocity(60, percent);
+  right_intake.setVelocity(60, percent);
+  turnfor(-510); // Originally -365
+
+  move_onetiletime(1100);
+  //move_onetile(0.5);
+  stoptake();
 
   ramp.setVelocity(80, percent);
   rampDown();
-  vex::task::sleep(1800);
+  vex::task::sleep(1700);
   rampStop();
 
   vex::task::sleep(200);
@@ -285,8 +305,8 @@ void usercontrol()
     else {stoptake();}
 
     ramp.setVelocity(100, percent);
-    if(Controller1.ButtonUp.pressing()){rampUp();}
-    else if(Controller1.ButtonDown.pressing()){rampDown();}
+    if(Controller1.ButtonDown.pressing()){rampUp();}
+    else if(Controller1.ButtonUp.pressing()){rampDown();}
     else{rampStop();}
 
     if (Controller1.ButtonB.pressing()) {
