@@ -230,7 +230,6 @@ void autonomous()
 
 void usercontrol() 
 {
-  arms.setStopping(brake);
   while (1) {
 
     //Brain.Screen.print("I AM WORKING YEEEEEEEEE!");
@@ -262,6 +261,10 @@ void usercontrol()
     if(Controller1.ButtonL2.pressing()) {up();}
     else if (Controller1.ButtonL1.pressing()) {down();}
     else {arms.stop();} //*/
+
+    // Arm Brakes
+    //if 
+    //arms.setStopping(brake);
     
     // Intake / Outtake
     left_intake.setVelocity(100, percent);
@@ -276,7 +279,7 @@ void usercontrol()
 
     // Ramp
     ramp.setVelocity(75, percent);
-    if (Controller1.ButtonLeft.pressing() || Controller1.ButtonRight.pressing()){ramp.setVelocity(100, percent)}
+    if (Controller1.ButtonLeft.pressing() || Controller1.ButtonRight.pressing()){ramp.setVelocity(100, percent);}
 
     if(Controller1.ButtonUp.pressing() || Controller1.ButtonLeft.pressing()){
       rampUp();
