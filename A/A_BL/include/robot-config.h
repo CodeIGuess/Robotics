@@ -12,6 +12,7 @@ extern motor left_intake;
 extern motor right_intake;
 extern motor arms;
 extern motor ramp;
+extern pot Potentiometer;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Text.
