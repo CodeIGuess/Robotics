@@ -235,11 +235,17 @@ void autonomous() {
   // Turn and put blocks
   left_intake.setVelocity(60, percent);
   right_intake.setVelocity(60, percent);
-  turnfor(-510); // Originally -365
+  turnfor(510); // Originally -365 | Turn value negative for blue
+
+  stoptake();
+
+  basevelocity(75);
 
   move_onetiletime(1100);
-  //move_onetile(0.5);
-  stoptake();
+
+  left_intake.setVelocity(10, percent);
+  right_intake.setVelocity(10, percent);
+  outtake();
 
   ramp.setVelocity(80, percent);
   rampDown();
@@ -248,12 +254,8 @@ void autonomous() {
 
   vex::task::sleep(200);
 
-  left_intake.setVelocity(20, percent);
-  right_intake.setVelocity(20, percent);
-  outtake();
-
-  basevelocity(30);
-  move_onetile(-1);
+  basevelocity(50);
+  move_onetile(-1.5);
 
 }
 
