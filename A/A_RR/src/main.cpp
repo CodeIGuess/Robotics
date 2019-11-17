@@ -261,8 +261,6 @@ void autonomous() {
 
 void usercontrol() {
   while (1) {
-
-    //Brain.Screen.print("I AM WORKING YEEEEEEEEE!");
     
     float Axis1 = -Controller1.Axis1.value();
     float Axis2 = -Controller1.Axis2.value();
