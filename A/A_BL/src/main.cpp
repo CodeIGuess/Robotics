@@ -235,7 +235,7 @@ void autonomous() {
   // Turn and put blocks
   left_intake.setVelocity(60, percent);
   right_intake.setVelocity(60, percent);
-  turnfor(510); // Originally -365 | Turn value negative for blue
+  turnfor(-510); // Originally -365 | Turn value negative for blue
 
   stoptake();
 
