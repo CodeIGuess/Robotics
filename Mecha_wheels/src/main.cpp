@@ -267,7 +267,7 @@ void usercontrol() {
     
     // Axis Variables
     int Axis1 = -Controller1.Axis1.value();
-    int Axis2 = -Controller1.Axis2.value();
+    int Axis2 = -Controller1.Axis2.value(); // We don't talk about this lad
     int Axis3 =  Controller1.Axis3.value();
     int Axis4 = -Controller1.Axis4.value();
 
