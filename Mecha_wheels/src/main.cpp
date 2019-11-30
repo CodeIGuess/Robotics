@@ -14,34 +14,6 @@
 // ramp                 motor         19              
 // Gyro                 gyro          B               
 // ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// front_right          motor         10              
-// front_left           motor         1               
-// back_left            motor         11              
-// back_right           motor         20              
-// Controller1          controller                    
-// left_intake          motor         3               
-// right_intake         motor         7               
-// arms                 motor         14              
-// Vision               vision        13              
-// Potentiometer        pot           A               
-// ramp                 motor         19              
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// front_right          motor         11              
-// front_left           motor         20              
-// back_left            motor         10              
-// back_right           motor         1               
-// Controller1          controller                    
-// left_intake          motor         19              
-// right_intake         motor         12              
-// arm_right            motor         5               
-// arm_left             motor         6               
-// ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
