@@ -193,7 +193,7 @@ void pre_auton() {
 }
 
 void autonomous() {
-  // AUTON FOR RED RIGHT AND BLUE LEFT >> OFFICIALLY TESTED AND WORKS!!!!
+  /* AUTON FOR RED RIGHT AND BLUE LEFT >> OFFICIALLY TESTED AND WORKS!!!!
 
   // 1 tile movement is 2.32 rotations
   // The first tile movement is 2.08 rotations
@@ -255,7 +255,7 @@ void autonomous() {
   vex::task::sleep(200);
 
   basevelocity(50);
-  move_onetile(-1.5);
+  move_onetile(-1.5);*/
 
 }
 

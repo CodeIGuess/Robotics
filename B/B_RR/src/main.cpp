@@ -93,6 +93,29 @@ void rampStop()
   ramp.setVelocity(0, percent);
   ramp.spin(forward);
 }
+// Variable for times pressed button
+int ramp_vel = 75;
+int xPressed = 0;
+// Function for times pressed button
+void timespressed(){
+  xPressed++;
+  Controller1.Screen.clearScreen();
+  Controller1.Screen.print("Times Pressed");
+}
+void(minus10()){
+  if(ramp_vel > 10){
+      ramp_vel -= 10;
+      Controller1.Screen.clearScreen();
+      Controller1.Screen.print("Current Vel is =>", ramp_vel);
+  }
+}
+void(plus10()){
+  if(ramp_vel < 90){
+    ramp_vel += 10;
+    Controller1.Screen.clearScreen();
+    Controller1.Screen.print("Current Vel is =>", ramp_vel);
+  }
+}
 
 // Arms Movement
 void up()
@@ -181,7 +204,7 @@ void pre_auton()
 
 void autonomous()
 {
-  // !!!!THIS AUTON HAS NOT BEEN TESTED!!!!
+  /* !!!!THIS AUTON HAS NOT BEEN TESTED!!!!
 
   // 1 tile movement is 2.32 rotations
   // The first tile movement is 2.08 rotations
@@ -201,7 +224,7 @@ void autonomous()
   Controller1.Screen.print("Forward & Back");
 
   // Turn 90 degrees to look at 4 blocks | wall safety | lift arms
-  /*turnfor(90);
+  turnfor(90);
   GO(-0.5);
   arms.spin(forward);
 
@@ -224,8 +247,8 @@ void autonomous()
   basevelocity(30);
   move_onetile(-1);
   Controller1.Screen.clearLine();
-  Controller1.Screen.setCursor(1,1);*/
-  Controller1.Screen.print("Auton Finished");
+  Controller1.Screen.setCursor(1,1);
+  Controller1.Screen.print("Auton Finished");*/
 }
 
 void usercontrol() 
@@ -245,11 +268,10 @@ void usercontrol()
       speedWave -= ((speedWave > 0) ? 2 : 0);
     }
 
-    front_left.setVelocity(speedWave, percent);
-    back_right.setVelocity(speedWave, percent);
-    back_left.setVelocity(speedWave, percent);
-    front_right.setVelocity(speedWave, percent);
-
+    front_left.setVelocity(50, percent);
+    back_right.setVelocity(50, percent);
+    back_left.setVelocity(50, percent);
+    front_right.setVelocity(50, percent);
 
     front_left.spin(directionType::fwd, Axis3 - Axis1, velocityUnits::pct);
     back_left.spin(directionType::fwd, Axis3 - Axis1, velocityUnits::pct);
@@ -260,11 +282,7 @@ void usercontrol()
     // Arms
     if(Controller1.ButtonL2.pressing()) {up();}
     else if (Controller1.ButtonL1.pressing()) {down();}
-    else {arms.stop();} //*/
-
-    // Arm Brakes
-    //if 
-    //arms.setStopping(brake);
+    else {arms.stop();} 
     
     // Intake / Outtake
     left_intake.setVelocity(100, percent);
@@ -278,16 +296,19 @@ void usercontrol()
     else {stoptake();}
 
     // Ramp
-    ramp.setVelocity(75, percent);
-    if (Controller1.ButtonLeft.pressing() || Controller1.ButtonRight.pressing()){ramp.setVelocity(100, percent);}
-
-    if(Controller1.ButtonUp.pressing() || Controller1.ButtonLeft.pressing()){
+    ramp.setVelocity(ramp_vel, percent);
+    if(Controller1.ButtonUp.pressing()){
       rampUp();
-    } else if(Controller1.ButtonDown.pressing() || Controller1.ButtonRight.pressing()){
+    }
+    else if(Controller1.ButtonDown.pressing()){
       rampDown();
-    } else {
+    }
+    else{
       rampStop();
     }
+    // Ramp Velocity
+    Controller1.ButtonLeft.pressed(minus10);
+    Controller1.ButtonRight.pressed(plus10);
 
     if (Controller1.ButtonB.pressing()) {
       Controller1.Screen.clearLine();
