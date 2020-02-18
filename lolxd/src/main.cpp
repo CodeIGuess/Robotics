@@ -36,6 +36,7 @@ using namespace vex;
 
 competition Competition;
 
+// Speed variables
 int speedBase = 75;
 int speed = speedBase;
 
@@ -43,6 +44,8 @@ int speed = speedBase;
 float rotations = 360;
 double firstTile = 2.08 * rotations; //THIS MEASUREMENT IS NOT SET
 double oneTile = 2.32 * rotations; //THIS MEASUREMENT IS NOT SET
+
+// Screen functions
 
 void print(double n) {
   Controller1.Screen.clearScreen();
@@ -150,7 +153,7 @@ void stoptake() {
   intakeRight.spin(forward);
 }
 
-// Body speed control
+// Change body speed
 void faster() {
   speed = std::min(speed + 25, 75);
   speed = ((speed == 35) ? 75 : speed);
@@ -187,7 +190,7 @@ void autonomous() {
   task::sleep(100);
 }
 
-// Used to know when a button starts being pressed.
+// Used to know when a button starts being pressed
 bool upLastFrame = false;
 bool downLastFrame = false;
 bool xLastFrame = false;
@@ -216,21 +219,24 @@ void usercontrol() {
       ramp.spin(directionType::fwd, Axis2 * 0.30, velocityUnits::pct);
     }
 
+    // Get the current button states
     bool upPressing = Controller1.ButtonUp.pressing();
     bool downPressing = Controller1.ButtonDown.pressing();
     bool xPressing = Controller1.ButtonX.pressing();
 
+    // If up just got pressed, speed up. If down just got pressed, speed up.
     if(upPressing && !upLastFrame) {
       faster();
     } else if(downPressing && !downLastFrame) {
       slower();
     }
 
+    // Save current button state for next frame
     upLastFrame = upPressing;
     downLastFrame = downPressing;
     xLastFrame = xPressing;
 
-    // Arms
+    // L1 raises the arms up, L2 lowers them
     if(Controller1.ButtonL1.pressing()) {
       armsUp();
     } else if(Controller1.ButtonL2.pressing()) {
@@ -239,15 +245,16 @@ void usercontrol() {
       arms.stop();
     }
 
-    // Intake Velocity
-    if(Controller1.ButtonR2.pressing()) {
-      outtake(speed);
-    } else if(Controller1.ButtonR1.pressing()) {
+    // R1 intakes and R2 outtakes
+    if(Controller1.ButtonR1.pressing()) {
       intake(speed);
+    } else if(Controller1.ButtonR2.pressing()) {
+      outtake(speed);
     } else {
       stoptake();
     }
 
+    // Print debug info
     if(Brain.Screen.pressing()) {
       /*Brain.Screen.clearScreen();
       printBrain("Ramp:", 1, 1);
