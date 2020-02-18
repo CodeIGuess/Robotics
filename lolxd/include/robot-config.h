@@ -24,6 +24,7 @@ extern vision Vision;
 extern pot Potentiometer;
 extern sonar Ultrasonic;
 extern motor ramp;
+extern pot PotentiometerH;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Text.
