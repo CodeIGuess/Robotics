@@ -2,7 +2,7 @@
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
 // front_right          motor         10              
-// front_left           motor         20              
+// frontLeft           motor         20              
 // back_left            motor         19              
 // back_right           motor         11              
 // Controller1          controller                    
@@ -42,8 +42,8 @@ int speed = speedBase;
 
 // Distance Variables
 float rotations = 360;
-double first_tile = 2.08*rotations; //THIS MEASUREMENT IS NOT SET
-double one_tile = 2.32*rotations; //THIS MEASUREMENT IS NOT SET
+double first_tile = 2.08 * rotations; //THIS MEASUREMENT IS NOT SET
+double one_tile = 2.32 * rotations; //THIS MEASUREMENT IS NOT SET
 
 void print(double n) 
 {
@@ -72,7 +72,7 @@ void printBrain(double n, double cursorX, double cursorY)
   Brain.Screen.setCursor(cursorY, cursorX);
   Brain.Screen.print(n);
 }
-void printBrain(char *n, double cursorX, double cursorY) 
+void printBrain(char* n, double cursorX, double cursorY) 
 {
   Brain.Screen.setCursor(cursorY, cursorX);
   Brain.Screen.print(n);
@@ -85,39 +85,39 @@ void clearScreen()
 }
 
 // Auton Helper Functions™
-void basevelocity(double n) 
+void base_velocity(double n) 
 {
-  front_left.setVelocity(n, percent);
+  frontLeft.setVelocity(n, percent);
   front_right.setVelocity(n, percent);
   back_right.setVelocity(n, percent);
   back_left.setVelocity(n, percent);
 }
-void moveTurns(double n) 
+void move_turns(double n) 
 {
   front_right.rotateFor(n, turns, false);
   back_right.rotateFor(n, turns, false);
-  front_left.rotateFor(n, turns, false);
+  frontLeft.rotateFor(n, turns, false);
   back_left.rotateFor(n, turns);
 }
 void moveTurns(double nl, double nr) 
 {
   front_right.rotateFor(nr, turns, false);
   back_right.rotateFor(nr, turns, false);
-  front_left.rotateFor(nl, turns, false);
+  frontLeft.rotateFor(nl, turns, false);
   back_left.rotateFor(nl, turns);
 }
 void moveDegrees(double n) 
 {
   front_right.spinFor(n, degrees, false);
   back_right.spinFor(n, degrees, false);
-  front_left.spinFor(n, degrees, false);
+  frontLeft.spinFor(n, degrees, false);
   back_left.spinFor(n, degrees);
 }
 void moveDegrees(double nl, double nr) 
 {
   front_right.spinFor(nr, degrees, false);
   back_right.spinFor(nr, degrees, false);
-  front_left.spinFor(nl, degrees, false);
+  frontLeft.spinFor(nl, degrees, false);
   back_left.spinFor(nl, degrees);
 }
 
@@ -176,14 +176,12 @@ void faster()
 {
   speed = std::min(speed + 25, 75);
   speed = ((speed == 35) ? 75 : speed);
-  //speed += 10;
   print(speed);
 }
 void slower()
 {
   speed = std::max(speed - 25, 10);
   speed = ((speed == 50) ? 10 : speed);
-  //speed -= 10;
   print(speed);
 }
 
@@ -220,7 +218,7 @@ void autonomous()
 
 void usercontrol() 
 {
-  while (1) 
+  while(1) 
   {
     
     float Axis1 = -Controller1.Axis1.value();
@@ -232,13 +230,13 @@ void usercontrol()
 
     if(!Controller1.ButtonA.pressing()) 
     {
-      front_left.spin(directionType::fwd, (Axis3 - Axis1) * speed / 100, velocityUnits::pct);
+      frontLeft.spin(directionType::fwd, (Axis3 - Axis1) * speed / 100, velocityUnits::pct);
       back_left.spin(directionType::fwd, (Axis3 - Axis1) * speed / 100, velocityUnits::pct);
 
       front_right.spin(directionType::fwd, (Axis3 + Axis1) * speed / 100, velocityUnits::pct);
       back_right.spin(directionType::fwd, (Axis3 + Axis1) * speed / 100, velocityUnits::pct);
     } else {
-      front_left.spin(directionType::fwd, (Axis3 - Axis4) * speed / 100, velocityUnits::pct);
+      frontLeft.spin(directionType::fwd, (Axis3 - Axis4) * speed / 100, velocityUnits::pct);
       back_left.spin(directionType::fwd, (Axis3 - Axis4) * speed / 100, velocityUnits::pct);
 
       front_right.spin(directionType::fwd, (Axis3 + Axis4) * speed / 100, velocityUnits::pct);
