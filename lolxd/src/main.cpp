@@ -45,76 +45,64 @@ float rotations = 360;
 double firstTile = 2.08 * rotations; //THIS MEASUREMENT IS NOT SET
 double oneTile = 2.32 * rotations; //THIS MEASUREMENT IS NOT SET
 
-void print(double n) 
-{
+void print(double n) {
   Controller1.Screen.clearScreen();
-  Controller1.Screen.setCursor(1,1);
+  Controller1.Screen.setCursor(1, 1);
   Controller1.Screen.print(n);
 }
-void print(double n, double cursorX, double cursorY) 
-{
+void print(double n, double cursorX, double cursorY) {
   Controller1.Screen.setCursor(cursorY, cursorX);
   Controller1.Screen.print(n);
 }
-void print(char *n, double cursorX, double cursorY) 
-{
+void print(char* n, double cursorX, double cursorY) {
   Controller1.Screen.setCursor(cursorY, cursorX);
   Controller1.Screen.print(n);
 }
-void printBrain(double n) 
-{
+void printBrain(double n) {
   Brain.Screen.clearScreen();
-  Brain.Screen.setCursor(1,1);
+  Brain.Screen.setCursor(1, 1);
   Brain.Screen.print(n);
 }
-void printBrain(double n, double cursorX, double cursorY) 
-{
+void printBrain(double n, double cursorX, double cursorY) {
   Brain.Screen.setCursor(cursorY, cursorX);
   Brain.Screen.print(n);
 }
-void printBrain(char* n, double cursorX, double cursorY) 
-{
+void printBrain(char* n, double cursorX, double cursorY) {
   Brain.Screen.setCursor(cursorY, cursorX);
   Brain.Screen.print(n);
 }
 
-void clearScreen() 
-{
+void clearScreen() {
   Controller1.Screen.clearLine();
-  Controller1.Screen.setCursor(1,1);
+  Controller1.Screen.setCursor(1, 1);
 }
 
 // Auton Helper Functions™
-void baseVelocity(double n) 
-{
+void baseVelocity(double n) {
   frontLeft.setVelocity(n, percent);
   frontRight.setVelocity(n, percent);
   backRight.setVelocity(n, percent);
   backLeft.setVelocity(n, percent);
 }
-void moveTurns(double n) 
-{
+void moveTurns(double n) {
   frontRight.rotateFor(n, turns, false);
   backRight.rotateFor(n, turns, false);
   frontLeft.rotateFor(n, turns, false);
   backLeft.rotateFor(n, turns);
 }
-void moveTurns(double nl, double nr) 
-{
+void moveTurns(double nl, double nr) {
   frontRight.rotateFor(nr, turns, false);
   backRight.rotateFor(nr, turns, false);
   frontLeft.rotateFor(nl, turns, false);
   backLeft.rotateFor(nl, turns);
 }
-void moveDegrees(double n) 
-{
+void moveDegrees(double n) {
   frontRight.spinFor(n, degrees, false);
   backRight.spinFor(n, degrees, false);
   frontLeft.spinFor(n, degrees, false);
   backLeft.spinFor(n, degrees);
 }
-void moveDegrees(double nl, double nr) 
-{
+void moveDegrees(double nl, double nr) {
   frontRight.spinFor(nr, degrees, false);
   backRight.spinFor(nr, degrees, false);
   frontLeft.spinFor(nl, degrees, false);
@@ -122,49 +110,41 @@ void moveDegrees(double nl, double nr)
 }
 
 // Ramp Movement
-void rampUp() 
-{
+void rampUp() {
   ramp.spin(forward);
 }
-void rampDown() 
-{
+void rampDown() {
   ramp.spin(reverse);
 }
-void rampStop() 
-{
+void rampStop() {
   ramp.setVelocity(0, percent);
   ramp.spin(forward);
 }
 
 // Arm Movement
-void up() 
-{
+void up() {
   arms.setVelocity(100, percent);
   arms.spin(forward);
 }
-void down() 
-{
+void down() {
   arms.setVelocity(100, pct);
   arms.spin(reverse);
 }
 
 // Intake Movement
-void intake(double p) 
-{
+void intake(double p) {
   intakeLeft.setVelocity(p * speed / 100, percent);
   intakeRight.setVelocity(p, percent);
   intakeLeft.spin(forward);
   intakeRight.spin(forward);
 }
-void outtake(double p) 
-{
+void outtake(double p) {
   intakeLeft.setVelocity(p * speed / 100, percent);
   intakeRight.setVelocity(p * speed / 100, percent);
   intakeLeft.spin(reverse);
   intakeRight.spin(reverse);
 }
-void stoptake() 
-{
+void stoptake() {
   intakeLeft.setVelocity(0, percent);
   intakeRight.setVelocity(0, percent);
   intakeLeft.spin(forward);
@@ -172,14 +152,12 @@ void stoptake()
 }
 
 // Body speed control
-void faster() 
-{
+void faster() {
   speed = std::min(speed + 25, 75);
   speed = ((speed == 35) ? 75 : speed);
   print(speed);
 }
-void slower()
-{
+void slower() {
   speed = std::max(speed - 25, 10);
   speed = ((speed == 50) ? 10 : speed);
   print(speed);
@@ -189,14 +167,12 @@ bool upLastFrame = false;
 bool downLastFrame = false;
 bool xLastFrame = false;
 
-void pre_auton() 
-{
+void pre_auton() {
   // Motors Resetting 
   // No Code needed in this section  
 }
 
-void autonomous() 
-{
+void autonomous() {
   // Variables for movement
   float tile = 2.32; // Changes depending on wheel size
 
@@ -208,28 +184,25 @@ void autonomous()
   task::sleep(500);
   intake(75);
   task::sleep(500);
-  
+
   // Get four blocks and return
-  moveTurns(2*tile);
+  moveTurns(2 * tile);
   task::sleep(100);
   stoptake();
   task::sleep(100);
 }
 
-void usercontrol() 
-{
-  while(1) 
-  {
-    
+void usercontrol() {
+  while(1) {
+
     float Axis1 = -Controller1.Axis1.value();
     float Axis2 = -Controller1.Axis2.value();
-    float Axis3 =  Controller1.Axis3.value();
+    float Axis3 = Controller1.Axis3.value();
     float Axis4 = -Controller1.Axis4.value();
 
     // basevelocity(speed);
 
-    if(!Controller1.ButtonA.pressing()) 
-    {
+    if(!Controller1.ButtonA.pressing()) {
       frontLeft.spin(directionType::fwd, (Axis3 - Axis1) * speed / 100, velocityUnits::pct);
       backLeft.spin(directionType::fwd, (Axis3 - Axis1) * speed / 100, velocityUnits::pct);
 
@@ -243,15 +216,14 @@ void usercontrol()
       backRight.spin(directionType::fwd, (Axis3 + Axis4) * speed / 100, velocityUnits::pct);
 
       ramp.setVelocity(100, percent);
-      ramp.spin(directionType::fwd, Axis2*0.30, velocityUnits::pct);
+      ramp.spin(directionType::fwd, Axis2 * 0.30, velocityUnits::pct);
     }
 
     bool upPressing = Controller1.ButtonUp.pressing();
     bool downPressing = Controller1.ButtonDown.pressing();
     bool xPressing = Controller1.ButtonX.pressing();
-    
-    if(upPressing && !upLastFrame) 
-    {
+
+    if(upPressing && !upLastFrame) {
       faster();
     } else if(downPressing && !downLastFrame) {
       slower();
@@ -262,16 +234,24 @@ void usercontrol()
     xLastFrame = xPressing;
 
     // Arms
-    if(Controller1.ButtonL1.pressing()) {up();}
-    else if (Controller1.ButtonL2.pressing()) {down();}
-    else {arms.stop();}
-    
-    // Intake Velocity
-    if(Controller1.ButtonR2.pressing()) {outtake(speed);}
-    else if (Controller1.ButtonR1.pressing()) {intake(speed);}
-    else {stoptake();}
+    if(Controller1.ButtonL1.pressing()) {
+      up();
+    } else if(Controller1.ButtonL2.pressing()) {
+      down();
+    } else {
+      arms.stop();
+    }
 
-    if (Brain.Screen.pressing()) {
+    // Intake Velocity
+    if(Controller1.ButtonR2.pressing()) {
+      outtake(speed);
+    } else if(Controller1.ButtonR1.pressing()) {
+      intake(speed);
+    } else {
+      stoptake();
+    }
+
+    if(Brain.Screen.pressing()) {
       /*Brain.Screen.clearScreen();
       printBrain("Ramp:", 1, 1);
       printBrain("Arms:", 1, 2);
@@ -288,19 +268,17 @@ void usercontrol()
   }
 }
 
-int main() 
-{
+int main() {
 
-    vexcodeInit();
+  vexcodeInit();
 
-    Competition.autonomous(autonomous);
-    Competition.drivercontrol(usercontrol);
+  Competition.autonomous(autonomous);
+  Competition.drivercontrol(usercontrol);
 
-    pre_auton();
-       
-    //Prevent main from exiting with an infinite loop.                        
-    while(1) 
-    {
-      task::sleep(100);//Sleep the task for a short amount of time to prevent wasted resources.
-    }    
+  pre_auton();
+
+  //Prevent main from exiting with an infinite loop.                        
+  while(1) {
+    task::sleep(100); //Sleep the task for a short amount of time to prevent wasted resources.
+  }
 }
