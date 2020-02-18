@@ -36,11 +36,10 @@ using namespace vex;
 
 competition Competition;
 
-// Base Variables
 int speedBase = 75;
 int speed = speedBase;
 
-// Distance Variables
+// Distance variables
 float rotations = 360;
 double firstTile = 2.08 * rotations; //THIS MEASUREMENT IS NOT SET
 double oneTile = 2.32 * rotations; //THIS MEASUREMENT IS NOT SET
@@ -77,7 +76,7 @@ void clearScreen() {
   Controller1.Screen.setCursor(1, 1);
 }
 
-// Auton Helper Functions™
+// Autonomous helper functions
 void baseVelocity(double n) {
   frontLeft.setVelocity(n, percent);
   frontRight.setVelocity(n, percent);
@@ -109,7 +108,7 @@ void moveDegrees(double nl, double nr) {
   backLeft.spinFor(nl, degrees);
 }
 
-// Ramp Movement
+// Ramp movement
 void rampUp() {
   ramp.spin(forward);
 }
@@ -121,17 +120,17 @@ void rampStop() {
   ramp.spin(forward);
 }
 
-// Arm Movement
-void up() {
+// Arm movement
+void armsUp() {
   arms.setVelocity(100, percent);
   arms.spin(forward);
 }
-void down() {
+void armsDown() {
   arms.setVelocity(100, pct);
   arms.spin(reverse);
 }
 
-// Intake Movement
+// Intake movement
 void intake(double p) {
   intakeLeft.setVelocity(p * speed / 100, percent);
   intakeRight.setVelocity(p, percent);
@@ -163,10 +162,6 @@ void slower() {
   print(speed);
 }
 
-bool upLastFrame = false;
-bool downLastFrame = false;
-bool xLastFrame = false;
-
 void pre_auton() {
   // Motors Resetting 
   // No Code needed in this section  
@@ -178,9 +173,9 @@ void autonomous() {
 
   // Prepare Robot for Auton (Lift ramp)
   basevelocity(speedBase);
-  up();
+  armsUp();
   task::sleep(1200);
-  down();
+  armsDown();
   task::sleep(500);
   intake(75);
   task::sleep(500);
@@ -192,26 +187,28 @@ void autonomous() {
   task::sleep(100);
 }
 
+// Used to know when a button starts being pressed.
+bool upLastFrame = false;
+bool downLastFrame = false;
+bool xLastFrame = false;
+
 void usercontrol() {
   while(1) {
-
     float Axis1 = -Controller1.Axis1.value();
     float Axis2 = -Controller1.Axis2.value();
     float Axis3 = Controller1.Axis3.value();
     float Axis4 = -Controller1.Axis4.value();
 
-    // basevelocity(speed);
+    // baseVelocity(speed);
 
     if(!Controller1.ButtonA.pressing()) {
       frontLeft.spin(directionType::fwd, (Axis3 - Axis1) * speed / 100, velocityUnits::pct);
       backLeft.spin(directionType::fwd, (Axis3 - Axis1) * speed / 100, velocityUnits::pct);
-
       frontRight.spin(directionType::fwd, (Axis3 + Axis1) * speed / 100, velocityUnits::pct);
       backRight.spin(directionType::fwd, (Axis3 + Axis1) * speed / 100, velocityUnits::pct);
     } else {
       frontLeft.spin(directionType::fwd, (Axis3 - Axis4) * speed / 100, velocityUnits::pct);
       backLeft.spin(directionType::fwd, (Axis3 - Axis4) * speed / 100, velocityUnits::pct);
-
       frontRight.spin(directionType::fwd, (Axis3 + Axis4) * speed / 100, velocityUnits::pct);
       backRight.spin(directionType::fwd, (Axis3 + Axis4) * speed / 100, velocityUnits::pct);
 
@@ -235,9 +232,9 @@ void usercontrol() {
 
     // Arms
     if(Controller1.ButtonL1.pressing()) {
-      up();
+      armsUp();
     } else if(Controller1.ButtonL2.pressing()) {
-      down();
+      armsDown();
     } else {
       arms.stop();
     }
@@ -259,7 +256,7 @@ void usercontrol() {
       printBrain(round(PotentiometerH.angle(degrees)*1.005)-1, 6, 2);*/
       Brain.Screen.clearScreen();
       printBrain("a", 1, 1);
-      for (int a = 2; a < 13; a++) {
+      for(int a = 2; a < 13; a++) {
         printBrain("|.........|.........|.........|.........|.....|||||", 1, a);
       }
     }
