@@ -13,8 +13,8 @@ motor frontLeft = motor(PORT20, ratio18_1, false);
 motor backLeft = motor(PORT19, ratio18_1, false);
 motor backRight = motor(PORT11, ratio18_1, true);
 controller Controller1 = controller(primary);
-motor leftIntake = motor(PORT2, ratio18_1, false);
-motor rightIntake = motor(PORT1, ratio18_1, true);
+motor intakeLeft = motor(PORT2, ratio18_1, false);
+motor intakeRight = motor(PORT1, ratio18_1, true);
 motor arms = motor(PORT5, ratio18_1, false);
 /*vex-vision-config:begin*/
 signature Vision__ORANGE_CUBE = signature (1, 5231, 7655, 6443, -1505, -525, -1015, 4.2, 0);
