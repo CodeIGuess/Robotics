@@ -1,13 +1,13 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
-// front_right          motor         10              
+// frontRight          motor         10              
 // frontLeft           motor         20              
-// back_left            motor         19              
-// back_right           motor         11              
+// backLeft            motor         19              
+// backRight           motor         11              
 // Controller1          controller                    
-// left_intake          motor         2               
-// right_intake         motor         1               
+// intakeLeft          motor         2               
+// intakeRight         motor         1               
 // arms                 motor         5               
 // Vision               vision        13              
 // Potentiometer        pot           A               
@@ -42,8 +42,8 @@ int speed = speedBase;
 
 // Distance Variables
 float rotations = 360;
-double first_tile = 2.08 * rotations; //THIS MEASUREMENT IS NOT SET
-double one_tile = 2.32 * rotations; //THIS MEASUREMENT IS NOT SET
+double firstTile = 2.08 * rotations; //THIS MEASUREMENT IS NOT SET
+double oneTile = 2.32 * rotations; //THIS MEASUREMENT IS NOT SET
 
 void print(double n) 
 {
@@ -85,40 +85,40 @@ void clearScreen()
 }
 
 // Auton Helper Functions™
-void base_velocity(double n) 
+void baseVelocity(double n) 
 {
   frontLeft.setVelocity(n, percent);
-  front_right.setVelocity(n, percent);
-  back_right.setVelocity(n, percent);
-  back_left.setVelocity(n, percent);
+  frontRight.setVelocity(n, percent);
+  backRight.setVelocity(n, percent);
+  backLeft.setVelocity(n, percent);
 }
-void move_turns(double n) 
+void moveTurns(double n) 
 {
-  front_right.rotateFor(n, turns, false);
-  back_right.rotateFor(n, turns, false);
+  frontRight.rotateFor(n, turns, false);
+  backRight.rotateFor(n, turns, false);
   frontLeft.rotateFor(n, turns, false);
-  back_left.rotateFor(n, turns);
+  backLeft.rotateFor(n, turns);
 }
 void moveTurns(double nl, double nr) 
 {
-  front_right.rotateFor(nr, turns, false);
-  back_right.rotateFor(nr, turns, false);
+  frontRight.rotateFor(nr, turns, false);
+  backRight.rotateFor(nr, turns, false);
   frontLeft.rotateFor(nl, turns, false);
-  back_left.rotateFor(nl, turns);
+  backLeft.rotateFor(nl, turns);
 }
 void moveDegrees(double n) 
 {
-  front_right.spinFor(n, degrees, false);
-  back_right.spinFor(n, degrees, false);
+  frontRight.spinFor(n, degrees, false);
+  backRight.spinFor(n, degrees, false);
   frontLeft.spinFor(n, degrees, false);
-  back_left.spinFor(n, degrees);
+  backLeft.spinFor(n, degrees);
 }
 void moveDegrees(double nl, double nr) 
 {
-  front_right.spinFor(nr, degrees, false);
-  back_right.spinFor(nr, degrees, false);
+  frontRight.spinFor(nr, degrees, false);
+  backRight.spinFor(nr, degrees, false);
   frontLeft.spinFor(nl, degrees, false);
-  back_left.spinFor(nl, degrees);
+  backLeft.spinFor(nl, degrees);
 }
 
 // Ramp Movement
@@ -151,24 +151,24 @@ void down()
 // Intake Movement
 void intake(double p) 
 {
-  left_intake.setVelocity(p * speed / 100, percent);
-  right_intake.setVelocity(p, percent);
-  left_intake.spin(forward);
-  right_intake.spin(forward);
+  intakeLeft.setVelocity(p * speed / 100, percent);
+  intakeRight.setVelocity(p, percent);
+  intakeLeft.spin(forward);
+  intakeRight.spin(forward);
 }
 void outtake(double p) 
 {
-  left_intake.setVelocity(p * speed / 100, percent);
-  right_intake.setVelocity(p * speed / 100, percent);
-  left_intake.spin(reverse);
-  right_intake.spin(reverse);
+  intakeLeft.setVelocity(p * speed / 100, percent);
+  intakeRight.setVelocity(p * speed / 100, percent);
+  intakeLeft.spin(reverse);
+  intakeRight.spin(reverse);
 }
 void stoptake() 
 {
-  left_intake.setVelocity(0, percent);
-  right_intake.setVelocity(0, percent);
-  left_intake.spin(forward);
-  right_intake.spin(forward);
+  intakeLeft.setVelocity(0, percent);
+  intakeRight.setVelocity(0, percent);
+  intakeLeft.spin(forward);
+  intakeRight.spin(forward);
 }
 
 // Body speed control
@@ -185,9 +185,9 @@ void slower()
   print(speed);
 }
 
-bool up_last_frame = false;
-bool down_last_frame = false;
-bool x_last_frame = false;
+bool upLastFrame = false;
+bool downLastFrame = false;
+bool xLastFrame = false;
 
 void pre_auton() 
 {
@@ -231,35 +231,35 @@ void usercontrol()
     if(!Controller1.ButtonA.pressing()) 
     {
       frontLeft.spin(directionType::fwd, (Axis3 - Axis1) * speed / 100, velocityUnits::pct);
-      back_left.spin(directionType::fwd, (Axis3 - Axis1) * speed / 100, velocityUnits::pct);
+      backLeft.spin(directionType::fwd, (Axis3 - Axis1) * speed / 100, velocityUnits::pct);
 
-      front_right.spin(directionType::fwd, (Axis3 + Axis1) * speed / 100, velocityUnits::pct);
-      back_right.spin(directionType::fwd, (Axis3 + Axis1) * speed / 100, velocityUnits::pct);
+      frontRight.spin(directionType::fwd, (Axis3 + Axis1) * speed / 100, velocityUnits::pct);
+      backRight.spin(directionType::fwd, (Axis3 + Axis1) * speed / 100, velocityUnits::pct);
     } else {
       frontLeft.spin(directionType::fwd, (Axis3 - Axis4) * speed / 100, velocityUnits::pct);
-      back_left.spin(directionType::fwd, (Axis3 - Axis4) * speed / 100, velocityUnits::pct);
+      backLeft.spin(directionType::fwd, (Axis3 - Axis4) * speed / 100, velocityUnits::pct);
 
-      front_right.spin(directionType::fwd, (Axis3 + Axis4) * speed / 100, velocityUnits::pct);
-      back_right.spin(directionType::fwd, (Axis3 + Axis4) * speed / 100, velocityUnits::pct);
+      frontRight.spin(directionType::fwd, (Axis3 + Axis4) * speed / 100, velocityUnits::pct);
+      backRight.spin(directionType::fwd, (Axis3 + Axis4) * speed / 100, velocityUnits::pct);
 
       ramp.setVelocity(100, percent);
       ramp.spin(directionType::fwd, Axis2*0.30, velocityUnits::pct);
     }
 
-    bool up_pressing = Controller1.ButtonUp.pressing();
-    bool down_pressing = Controller1.ButtonDown.pressing();
-    bool x_pressing = Controller1.ButtonX.pressing();
+    bool upPressing = Controller1.ButtonUp.pressing();
+    bool downPressing = Controller1.ButtonDown.pressing();
+    bool xPressing = Controller1.ButtonX.pressing();
     
-    if(up_pressing && !up_last_frame) 
+    if(upPressing && !upLastFrame) 
     {
       faster();
-    } else if(down_pressing && !down_last_frame) {
+    } else if(downPressing && !downLastFrame) {
       slower();
     }
 
-    up_last_frame = up_pressing;
-    down_last_frame = down_pressing;
-    x_last_frame = x_pressing;
+    upLastFrame = upPressing;
+    downLastFrame = downPressing;
+    xLastFrame = xPressing;
 
     // Arms
     if(Controller1.ButtonL1.pressing()) {up();}
