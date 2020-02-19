@@ -22,8 +22,10 @@ void loop() {
   
   inches = microsecondsToInches(duration);
 
-  if (inches < 10) {
-    
+  if (inches < 5) {
+    digitalWrite(beeperPin, HIGH);
+  } else {
+    digitalWrite(beeperPin, LOW);
   }
   
   Serial.print(inches);
