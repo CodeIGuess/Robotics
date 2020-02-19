@@ -56,7 +56,7 @@ void print(double n, double cursorX, double cursorY) {
   Controller1.Screen.setCursor(cursorY, cursorX);
   Controller1.Screen.print(n);
 }
-void print(char* n, double cursorX, double cursorY) {
+void print(char n, double cursorX, double cursorY) {
   Controller1.Screen.setCursor(cursorY, cursorX);
   Controller1.Screen.print(n);
 }
@@ -135,22 +135,22 @@ void armsDown() {
 
 // Intake movement
 void intake(double p) {
-  intakeLeft.setVelocity(p * speed / 100, percent);
-  intakeRight.setVelocity(p, percent);
-  intakeLeft.spin(forward);
-  intakeRight.spin(forward);
+  leftIntake.setVelocity(p * speed / 100, percent);
+  rightIntake.setVelocity(p, percent);
+  leftIntake.spin(forward);
+  rightIntake.spin(forward);
 }
 void outtake(double p) {
-  intakeLeft.setVelocity(p * speed / 100, percent);
-  intakeRight.setVelocity(p * speed / 100, percent);
-  intakeLeft.spin(reverse);
-  intakeRight.spin(reverse);
+  leftIntake.setVelocity(p * speed / 100, percent);
+  rightIntake.setVelocity(p * speed / 100, percent);
+  leftIntake.spin(reverse);
+  rightIntake.spin(reverse);
 }
 void stoptake() {
-  intakeLeft.setVelocity(0, percent);
-  intakeRight.setVelocity(0, percent);
-  intakeLeft.spin(forward);
-  intakeRight.spin(forward);
+  leftIntake.setVelocity(0, percent);
+  rightIntake.setVelocity(0, percent);
+  leftIntake.spin(forward);
+  rightIntake.spin(forward);
 }
 
 // Change body speed
@@ -171,11 +171,15 @@ void pre_auton() {
 }
 
 void autonomous() {
+
   // Variables for movement
-  float tile = 2.32; // Changes depending on wheel size
+  // Changes depending on wheel size
+  float tile = 2.32; 
 
   // Prepare Robot for Auton (Lift ramp)
-  basevelocity(speedBase);
+  // Sleeps are useful to prevent motors overheating and to seperate the robots actions
+  // Do not question the baseVelocity at the beginning 
+  baseVelocity(speedBase * 0.6);
   armsUp();
   task::sleep(1200);
   armsDown();
@@ -183,11 +187,42 @@ void autonomous() {
   intake(75);
   task::sleep(500);
 
+  // Make baseVelocity faster
+  baseVelocity(speedBase);
+
   // Get four blocks and return
-  moveTurns(2 * tile);
+  moveTurns(1.5 * tile);
   task::sleep(100);
-  stoptake();
-  task::sleep(100);
+  intake(40);
+
+  // Go back to original position substracting new bar distance
+  moveTurns(-1 * tile);
+  task::sleep(500);
+
+  // Turn left
+  // For Turning use range 0.50-0.70 (0.65 works perfect) 
+  moveTurns(-0.65, 0.65); 
+  task::sleep(500);
+
+  // Go towards goal to place blocks
+  moveTurns(tile);
+  task::sleep(500);
+
+  // Activate ramp slowly
+  ramp.setVelocity(20, pct);
+  rampUp();
+  task::sleep(1000);
+
+  // Outtake slowly
+  outtake(20);
+
+  // Go back to original position
+  moveTurns(-tile);
+
+  // Final Sleep 
+  vex::task::sleep(500);
+
+  // CONTINUE CODE WHEN PREVIOUS WORKS
 }
 
 // Used to know when a button starts being pressed
