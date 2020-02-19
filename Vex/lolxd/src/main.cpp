@@ -172,22 +172,53 @@ void pre_auton() {
 
 void autonomous() {
   // Variables for movement
-  float tile = 2.32; // Changes depending on wheel size
+  // Changes depending on wheel size
+  float tile = 2.32;
 
-  // Prepare Robot for Auton (Lift ramp)
-  basevelocity(speedBase);
+  // Prepare robot for auton (lift ramp)
+  // Sleeps are useful to prevent motors overheating and to separate the robot's actions
+  // Do not question baseVelocity at the beginning
+  baseVelocity(speedBase * 0.6);
   armsUp();
   task::sleep(1200);
   armsDown();
-  task::sleep(500);
   intake(75);
   task::sleep(500);
 
+  // Make baseVelocity faster
+  baseVelocity(speedBase);
+
   // Get four blocks and return
-  moveTurns(2 * tile);
+  moveTurns(1.5*tile);
   task::sleep(100);
-  stoptake();
-  task::sleep(100);
+  intake(40);
+
+  // Go back to the original position
+  moveTurns(-tile);
+  task::sleep(500);
+
+  // Turn
+  // For Turning use range 0.50-0.70 (0.65 works perfect)
+  moveTurns(-0.65, 0.65);
+  task::sleep(500);
+
+  // Go towards goal to place blocks
+  moveTurns(tile);
+  task::sleep(500);
+
+  // Activate ramp slowly
+  ramp.setVelocity(20, pct);
+  rampUp();
+  task::sleep(1000);
+  outtake(20);
+
+  // Go back to original position
+  moveTurns(-tile);
+
+  // Final Sleep
+  vex::task::sleep(500);
+
+  // CONTINUE WHEN PREVIOUS CODE WORKS!!!!!!!!!
 }
 
 // Used to know when a button starts being pressed
