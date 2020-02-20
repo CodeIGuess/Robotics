@@ -136,7 +136,7 @@ void armsDown() {
 // Intake movement
 void intake(double p) {
   intakeLeft.setVelocity(p * speed / 100, percent);
-  intakeRight.setVelocity(p, percent);
+  intakeRight.setVelocity(p * speed / 100, percent);
   intakeLeft.spin(forward);
   intakeRight.spin(forward);
 }
