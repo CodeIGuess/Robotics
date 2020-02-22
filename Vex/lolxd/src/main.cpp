@@ -1,6 +1,23 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
+// frontRight           motor         10              
+// frontLeft            motor         20              
+// backLeft             motor         19              
+// backRight            motor         11              
+// Controller1          controller                    
+// intakeLeft           motor         2               
+// intakeRight          motor         1               
+// arms                 motor         5               
+// Vision               vision        13              
+// potentiometer        pot           A               
+// ultrasonic           sonar         C, D            
+// ramp                 motor         14              
+// potentiometerH       pot           H               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
 // frontRight          motor         10              
 // frontLeft           motor         20              
 // backLeft            motor         19              
@@ -180,10 +197,11 @@ void autonomous() {
   // Do not question baseVelocity at the beginning
   baseVelocity(speedBase * 0.6);
   armsUp();
-  task::sleep(1200);
+  task::sleep(2200);
   armsDown();
   intake(75);
   task::sleep(500);
+  arms.stop();
 
   // Make baseVelocity faster
   baseVelocity(speedBase);
@@ -276,6 +294,9 @@ void usercontrol() {
       arms.stop();
     }
 
+    // Set intake speed to 100 for safety
+    intakeLeft.setVelocity(100, percent);
+    intakeRight.setVelocity(100, percent);
     // R1 intakes and R2 outtakes
     if(Controller1.ButtonR1.pressing()) {
       intake(speed);
@@ -293,10 +314,17 @@ void usercontrol() {
       printBrain(round(Potentiometer.angle(degrees)*1.005)-1, 6, 1);
       printBrain(round(PotentiometerH.angle(degrees)*1.005)-1, 6, 2);*/
       Brain.Screen.clearScreen();
-      printBrain("a", 1, 1);
-      for(int a = 2; a < 13; a++) {
-        printBrain("|.........|.........|.........|.........|.....|||||", 1, a);
-      }
+      printBrain("                                               ", 1, 1);
+      printBrain("                                               ", 1, 2);
+      printBrain("                                               ", 1, 3);
+      printBrain("   ..        ..........                        ", 1, 4);
+      printBrain("  .+=----*+++//****/##/********+++-::..:...... ", 1, 5);
+      printBrain("  ..:::::::.:::::::---:+\\\/==*#\/=++**//////=.", 1, 6);
+      printBrain("                     .=\%#-.   :/*.  ...::-=+: ", 1, 7);
+      printBrain("                    -#%#+.      ...            ", 1, 8);
+      printBrain("                     ::.                       ", 1, 9);
+      printBrain("                                               ", 1, 10);
+      printBrain("                                               ", 1, 11);
     }
 
     task::sleep(20);
