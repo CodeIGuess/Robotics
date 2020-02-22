@@ -167,6 +167,7 @@ void pre_auton() {
 }
 
 void autonomous() {
+  baseVelocity(75);
   moveTurns(2);
   vex::task::sleep(100);
   moveTurns(-2);
