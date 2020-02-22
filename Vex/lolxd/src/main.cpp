@@ -152,14 +152,14 @@ void armsDown() {
 
 // Intake movement
 void intake(double p) {
-  intakeLeft.setVelocity(p * speed / 100, percent);
-  intakeRight.setVelocity(p * speed / 100, percent);
+  intakeLeft.setVelocity(p, percent);
+  intakeRight.setVelocity(p, percent);
   intakeLeft.spin(forward);
   intakeRight.spin(forward);
 }
 void outtake(double p) {
-  intakeLeft.setVelocity(p * speed / 100, percent);
-  intakeRight.setVelocity(p * speed / 100, percent);
+  intakeLeft.setVelocity(p, percent);
+  intakeRight.setVelocity(p, percent);
   intakeLeft.spin(reverse);
   intakeRight.spin(reverse);
 }
@@ -202,6 +202,8 @@ void autonomous() {
   intake(75);
   task::sleep(500);
   arms.stop();
+
+  task::sleep(500);
 
   // Make baseVelocity faster
   baseVelocity(speedBase);
@@ -298,9 +300,9 @@ void usercontrol() {
     intakeLeft.setVelocity(100, percent);
     intakeRight.setVelocity(100, percent);
     // R1 intakes and R2 outtakes
-    if(Controller1.ButtonR1.pressing()) {
+    if(Controller1.ButtonR2.pressing()) {
       intake(speed);
-    } else if(Controller1.ButtonR2.pressing()) {
+    } else if(Controller1.ButtonR1.pressing()) {
       outtake(speed);
     } else {
       stoptake();

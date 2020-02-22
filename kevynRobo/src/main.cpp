@@ -229,9 +229,9 @@ void usercontrol() {
     }
 
     // R1 intakes and R2 outtakes
-    if(Controller1.ButtonR1.pressing()) {
+    if(Controller1.ButtonR2.pressing()) {
       intake(speed);
-    } else if(Controller1.ButtonR2.pressing()) {
+    } else if(Controller1.ButtonR1.pressing()) {
       outtake(speed);
     } else {
       stoptake();
