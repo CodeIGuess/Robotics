@@ -7,6 +7,19 @@
 // backLeft             motor         8               
 // frontLeft            motor         7               
 // ramp                 motor         2               
+// arms                 motor         15              
+// intakeLeft           motor         11              
+// intakeRight          motor         4               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// backRight            motor         10              
+// frontRight           motor         9               
+// backLeft             motor         8               
+// frontLeft            motor         7               
+// ramp                 motor         2               
 // arms                 motor         1               
 // intakeLeft           motor         11              
 // intakeRight          motor         4               
@@ -221,12 +234,12 @@ void usercontrol() {
     xLastFrame = xPressing;
 
     // L1 raises the arms up, L2 lowers them
-    if(Controller1.ButtonL1.pressing()) {
+    if(Controller1.ButtonL2.pressing()) {
       armsUp();
-    } else if(Controller1.ButtonL2.pressing()) {
+    } else if(Controller1.ButtonL1.pressing()) {
       armsDown();
     } else {
-      arms.stop();
+      arms.stop();  
     }
 
     // R1 intakes and R2 outtakes

@@ -14,7 +14,7 @@ motor frontRight = motor(PORT9, ratio18_1, true);
 motor backLeft = motor(PORT8, ratio18_1, false);
 motor frontLeft = motor(PORT7, ratio18_1, false);
 motor ramp = motor(PORT2, ratio18_1, false);
-motor arms = motor(PORT1, ratio18_1, false);
+motor arms = motor(PORT15, ratio18_1, false);
 motor intakeLeft = motor(PORT11, ratio18_1, false);
 motor intakeRight = motor(PORT4, ratio18_1, true);
 

@@ -1,23 +1,6 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
-// frontRight           motor         10              
-// frontLeft            motor         20              
-// backLeft             motor         19              
-// backRight            motor         11              
-// Controller1          controller                    
-// intakeLeft           motor         2               
-// intakeRight          motor         1               
-// arms                 motor         5               
-// Vision               vision        13              
-// potentiometer        pot           A               
-// ultrasonic           sonar         C, D            
-// ramp                 motor         14              
-// potentiometerH       pot           H               
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
 // frontRight          motor         10              
 // frontLeft           motor         20              
 // backLeft            motor         19              
@@ -154,14 +137,14 @@ void armsDown() {
 void intake(double p) {
   intakeLeft.setVelocity(p, percent);
   intakeRight.setVelocity(p, percent);
-  intakeLeft.spin(forward);
-  intakeRight.spin(forward);
+  intakeLeft.spin(reverse);
+  intakeRight.spin(reverse);
 }
 void outtake(double p) {
   intakeLeft.setVelocity(p, percent);
   intakeRight.setVelocity(p, percent);
-  intakeLeft.spin(reverse);
-  intakeRight.spin(reverse);
+  intakeLeft.spin(forward);
+  intakeRight.spin(forward);
 }
 void stoptake() {
   intakeLeft.setVelocity(0, percent);
@@ -195,21 +178,17 @@ void autonomous() {
   // Prepare robot for auton (lift ramp)
   // Sleeps are useful to prevent motors overheating and to separate the robot's actions
   // Do not question baseVelocity at the beginning
-  baseVelocity(speedBase * 0.6);
+  baseVelocity(45);
+  arms.setVelocity(90, pct);
   armsUp();
   task::sleep(2200);
   armsDown();
-  intake(75);
-  task::sleep(500);
+  task::sleep(2200);
   arms.stop();
 
-  task::sleep(500);
-
-  // Make baseVelocity faster
-  baseVelocity(speedBase);
-
   // Get four blocks and return
-  moveTurns(1.5*tile);
+  intake(100);
+  moveTurns(1.5 * tile);
   task::sleep(100);
   intake(40);
 
@@ -219,7 +198,7 @@ void autonomous() {
 
   // Turn
   // For Turning use range 0.50-0.70 (0.65 works perfect)
-  moveTurns(-0.65, 0.65);
+  moveTurns(0.80, -0.80);
   task::sleep(500);
 
   // Go towards goal to place blocks
@@ -300,9 +279,9 @@ void usercontrol() {
     intakeLeft.setVelocity(100, percent);
     intakeRight.setVelocity(100, percent);
     // R1 intakes and R2 outtakes
-    if(Controller1.ButtonR2.pressing()) {
+    if(Controller1.ButtonR1.pressing()) {
       intake(speed);
-    } else if(Controller1.ButtonR1.pressing()) {
+    } else if(Controller1.ButtonR2.pressing()) {
       outtake(speed);
     } else {
       stoptake();
