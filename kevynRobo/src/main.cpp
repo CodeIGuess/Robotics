@@ -110,13 +110,21 @@ void moveInches(double n) {
   frontLeft.spinFor(n*25, degrees, false);
   backLeft.spinFor(n*25, degrees);
 }
+void moveInches(double n1, double n2) {
+  frontRight.spinFor(n2*25, degrees, false);
+  backRight.spinFor(n2*25, degrees, false);
+  frontLeft.spinFor(n1*25, degrees, false);
+  backLeft.spinFor(n1*25, degrees);
+}
 
 // Ramp movement
-void rampUp() {
+void rampUp(double t) {
   ramp.spin(forward);
+  task::sleep(t);
 }
-void rampDown() {
+void rampDown(double t) {
   ramp.spin(reverse);
+  task::sleep(t);
 }
 void rampStop() {
   ramp.setVelocity(0, percent);
@@ -124,13 +132,17 @@ void rampStop() {
 }
 
 // Arm movement
-void armsUp() {
+void armsUp(double t) {
   arms.setVelocity(100, percent);
   arms.spin(forward);
+  // For how long will it move
+  vex::task::sleep(t);
 }
-void armsDown() {
+void armsDown(double t) {
   arms.setVelocity(100, pct);
   arms.spin(reverse);
+  // For how long will it move
+  vex::task::sleep(t);
 }
 
 // Intake movement
@@ -165,6 +177,11 @@ void slower() {
   print(speed);
 }
 
+// Sleep function because the actual function is super annoying
+void sleep(double t){
+  vex::task::sleep(t);
+} 
+
 void pre_auton() {
   // Motors Resetting 
   // No Code needed in this section  
@@ -181,15 +198,50 @@ void autonomous() {
   */
 
   // New Auton For Programming Skills
-  float tile = 23;
-  float boner = 7;
+  int tile = 23;
+  int wBar = 7;
+  float block = 5.5;
 
-
+  // Moving inches forward to activate the wheel bar 
   baseVelocity(50);
+  moveInches(wBar);
 
-  moveInches(boner);
+  armsUp(2000);
+  armsDown(1500);
+  arms.stop();
   
+  // Start intaking to move forward and get 5 blocks
+  intake(100);
+  moveInches(block * 5 + 1);
+  sleep(200);
+  intake(20);
 
+  // Move backwards 
+  moveInches(block * -4.5);
+
+  // Turn to put blocks
+  // (-a, b) for LEFT and inverse for RIGHT
+  moveInches(-12,12);
+  sleep(100);
+
+  // Move forward to put blocks
+  intake(20);
+  moveInches(3);
+
+  // Activate ramp
+  stoptake();
+  rampUp(2000);
+  outtake(20);
+
+  // Move a little bit forward slowly
+  baseVelocity(10);
+  moveInches(1);
+
+  // Go backwards
+  sleep(100);
+  baseVelocity(75);
+  moveInches(-10);
+ 
 }
 
 // Used to know when a button starts being pressed
@@ -240,9 +292,11 @@ void usercontrol() {
 
     // L1 raises the arms up, L2 lowers them
     if(Controller1.ButtonL2.pressing()) {
-      armsUp();
+      arms.setVelocity(100, percent);
+      arms.spin(forward);
     } else if(Controller1.ButtonL1.pressing()) {
-      armsDown();
+      arms.setVelocity(100, pct);
+      arms.spin(reverse);
     } else {
       arms.stop();  
     }
