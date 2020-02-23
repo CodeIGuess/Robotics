@@ -1,0 +1,37 @@
+ ### Data
+Robot Length (without boner): ~17.75''
+Robot Length (WITH    boner): ~24.75''
+Boner length: ~7''
+Tile Length:  ~23''
+Rotation: ~15''
+Block: 5.5''
+Collect all: 38'' 
+1 Tile: 1.53 rotations
+
+ ### Part 1 (15 second auton)
+Move 7 forward inches
+Raise arms
+(Ramp setup)
+Lower arms
+Start intake
+
+Move one and a half tiles
+(Pick up four blocks)
+
+Rotate ~30 degrees to the right
+Go forward a quarter of a tile
+(Pick up one block)
+Go back a quarter of a tile
+
+Rotate ~30 degrees to the left
+Back two tiles
+
+Forward half a tile
+Turn left 120 degrees
+Forward half a tile
+Ramp forwards (straigt) for ~2 seconds
+Outtake slowly indefenitely
+Go backwards one tile (slowly)
+(Place tower)
+
+ 

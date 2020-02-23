@@ -7,19 +7,6 @@
 // backLeft             motor         8               
 // frontLeft            motor         7               
 // ramp                 motor         2               
-// arms                 motor         15              
-// intakeLeft           motor         11              
-// intakeRight          motor         4               
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// Controller1          controller                    
-// backRight            motor         10              
-// frontRight           motor         9               
-// backLeft             motor         8               
-// frontLeft            motor         7               
-// ramp                 motor         2               
 // arms                 motor         1               
 // intakeLeft           motor         11              
 // intakeRight          motor         4               
@@ -35,7 +22,8 @@
 
 /*
 Robot Length: ~20''
-Tile Length:  ~24''
+Tile Length:  ~23''
+Rotation: ~15''
 */
 
 #include "vex.h"
@@ -90,10 +78,7 @@ void clearScreen() {
 
 // Autonomous helper functions
 void baseVelocity(double n) {
-  frontLeft.setVelocity(n, percent);
-  frontRight.setVelocity(n, percent);
-  backRight.setVelocity(n, percent);
-  backLeft.setVelocity(n, percent);
+  speed = float(n) / 100;
 }
 void moveTurns(double n) {
   frontRight.rotateFor(n, turns, false);
@@ -118,6 +103,12 @@ void moveDegrees(double nl, double nr) {
   backRight.spinFor(nr, degrees, false);
   frontLeft.spinFor(nl, degrees, false);
   backLeft.spinFor(nl, degrees);
+}
+void moveInches(double n) {
+  frontRight.spinFor(n*25, degrees, false);
+  backRight.spinFor(n*25, degrees, false);
+  frontLeft.spinFor(n*25, degrees, false);
+  backLeft.spinFor(n*25, degrees);
 }
 
 // Ramp movement
@@ -146,14 +137,14 @@ void armsDown() {
 void intake(double p) {
   intakeLeft.setVelocity(p * speed / 100, percent);
   intakeRight.setVelocity(p * speed / 100, percent);
-  intakeLeft.spin(forward);
-  intakeRight.spin(forward);
+  intakeLeft.spin(reverse);
+  intakeRight.spin(reverse);
 }
 void outtake(double p) {
   intakeLeft.setVelocity(p * speed / 100, percent);
   intakeRight.setVelocity(p * speed / 100, percent);
-  intakeLeft.spin(reverse);
-  intakeRight.spin(reverse);
+  intakeLeft.spin(forward);
+  intakeRight.spin(forward);
 }
 void stoptake() {
   intakeLeft.setVelocity(0, percent);
@@ -180,11 +171,25 @@ void pre_auton() {
 }
 
 void autonomous() {
+  
+  /* Move forward program
   baseVelocity(75);
   moveTurns(2);
   vex::task::sleep(100);
   moveTurns(-2);
   vex::task::sleep(100);
+  */
+
+  // New Auton For Programming Skills
+  float tile = 23;
+  float boner = 7;
+
+
+  baseVelocity(50);
+
+  moveInches(boner);
+  
+
 }
 
 // Used to know when a button starts being pressed
@@ -258,11 +263,6 @@ void usercontrol() {
       printBrain("Arms:", 1, 2);
       printBrain(round(Potentiometer.angle(degrees)*1.005)-1, 6, 1);
       printBrain(round(PotentiometerH.angle(degrees)*1.005)-1, 6, 2);*/
-      Brain.Screen.clearScreen();
-      printBrain("a", 1, 1);
-      for(int a = 2; a < 13; a++) {
-        printBrain("|.........|.........|.........|.........|.....|||||", 1, a);
-      }
     }
 
     task::sleep(20);
@@ -272,6 +272,9 @@ void usercontrol() {
 int main() {
 
   vexcodeInit();
+
+  Brain.Screen.clearScreen();
+  
 
   Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);
