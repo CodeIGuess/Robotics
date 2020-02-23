@@ -67,7 +67,7 @@ void setup() {
     for (color c : filterColors) {
       m = min(m, colorDist(col, c));
     }
-    if (m > 15) {
+    if (m > 20) {
       filterColors.append(col);
     }
   }
@@ -98,6 +98,6 @@ void setup() {
   out = out.substring(0, out.length()-1);
   out += "};\nint arr[] = {"+join(arr, ",")+"};\nfor (int a = 0; a < " + str(arr.length) + "; a++) {Brain.Screen.setFillColor(cs[arr[a]]);Brain.Screen.setPenColor(cs[arr[a]]);Brain.Screen.drawRectangle((a % " + screen.width + "), (a/" + screen.width + "), 1, 1);}";
   
-  //saveStrings("out.txt", new String[]{out});
+  saveStrings("out.txt", new String[]{out});
   print(arr.length, screen.width, screen.height);
 }
