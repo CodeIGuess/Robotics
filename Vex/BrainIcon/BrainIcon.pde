@@ -22,9 +22,9 @@ float colorDist(color col, color col2) {
 void setup() {
   size(960, 480);
   PImage img = loadImage("image.jpg"); img.filter(BLUR, 0.5);
-  PImage img2 = loadImage("image2.jpg"); img2.filter(BLUR, 1);
-  PImage img3 = loadImage("image3.jpg");
-  PImage img4 = loadImage("image4.png");
+  PImage img2 = loadImage("image2.jpg"); img2.filter(BLUR, 6.5);
+  PImage img3 = loadImage("image4.png");
+  
   PGraphics screen = createGraphics(480, 240);
   screen.beginDraw();
   screen.background(255);
@@ -37,7 +37,7 @@ void setup() {
     screen.text("Mechanics: Don't use the brain for non-work related purposes", 10, 20);
     screen.text("Programmers: *Use the brain for non-work related purposes*", 10, 40);
     screen.text("Mechanics: ", 10, 60);
-    screen.image(img4, (screen.width/2)-(img4.width*0.2/2), 74, img4.width*0.2, img4.height*0.2);
+    screen.image(img3, (screen.width/2)-(img3.width*0.2/2), 74, img3.width*0.2, img3.height*0.2);
   }
  
   
@@ -46,20 +46,28 @@ void setup() {
   PGraphics screenCols = createGraphics(screen.width, screen.height);
   screenCols.beginDraw();
   screenCols.image(screen, 0, 0);
+  screenCols.noStroke();
   screenCols.endDraw();
   
   IntList filterColors = new IntList();
   
   for (int a = 0; a < screen.width*screen.height; a++) {
     color col = screenCols.get(a % screen.width, a / screen.width);
-    if (a % ) {
-      
+    float t = (red(col) + green(col) + blue(col));
+    int cThresh = 550;
+    if (t >= cThresh) {
+      screenCols.beginDraw();
+      float v = map(t, cThresh, 765, 255, 100);
+      v = lerp(v, 255, map(a/screen.width, 0, screen.height, 1, 0));
+      screenCols.fill(v);
+      screenCols.rect(a % screen.width, a / screen.width, 1, 1);
+      screenCols.endDraw();
     }
     float m = 1000;
     for (color c : filterColors) {
       m = min(m, colorDist(col, c));
     }
-    if (m > 1) {
+    if (m > 15) {
       filterColors.append(col);
     }
   }
@@ -68,19 +76,6 @@ void setup() {
     colors[a] = filterColors.get(a);
   }
   println(colors.length);
-  /*IntDict ft = new IntDict();
-  for (int a = 0; a < allColors.length; a++) {
-    if (ft.hasKey(str(allColors[a]))) {
-      ft.set(str(allColors[a]), ft.get(str(allColors[a]))+1);
-    } else {
-      ft.set(str(allColors[a]), 1);
-    }
-  }
-  String[] colKeys = reverse(sort(ft.keyArray()));
-  println(colKeys.length);
-  for (int a = 0; a < colors.length; a++) {
-    colors[a] = int(colKeys[(int)map(pow(a, 2), 0, pow(colors.length, 2), 0, colKeys.length)]);
-  }*/
   
   String[] arr = new String[screen.width*screen.height];
   
@@ -88,7 +83,7 @@ void setup() {
   float r = width/screen.width;
   for (int x = 0; x < screen.width; x++) {
     for (int y = 0; y < screen.height; y++) {
-      color col = screen.get(int(x), int(y));
+      color col = screenCols.get(int(x), int(y));
       col = closeColor(col);
       arr[x % screen.width + (y * screen.width)] = str(col);
       fill(colors[col]);

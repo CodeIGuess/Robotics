@@ -86,11 +86,9 @@ void clearScreen() {
 
 // Autonomous helper functions
 void baseVelocity(double n) {
-  frontLeft.setVelocity(n, percent);
-  frontRight.setVelocity(n, percent);
-  backRight.setVelocity(n, percent);
-  backLeft.setVelocity(n, percent);
+  speed = n;
 }
+// Turns
 void moveTurns(double n) {
   frontRight.rotateFor(n, turns, false);
   backRight.rotateFor(n, turns, false);
@@ -103,6 +101,7 @@ void moveTurns(double nl, double nr) {
   frontLeft.rotateFor(nl, turns, false);
   backLeft.rotateFor(nl, turns);
 }
+// Degrees
 void moveDegrees(double n) {
   frontRight.spinFor(n, degrees, false);
   backRight.spinFor(n, degrees, false);
@@ -114,6 +113,19 @@ void moveDegrees(double nl, double nr) {
   backRight.spinFor(nr, degrees, false);
   frontLeft.spinFor(nl, degrees, false);
   backLeft.spinFor(nl, degrees);
+}
+// Inches
+void moveInches(double n) {
+  frontRight.spinFor(n*29, degrees, false);
+  backRight.spinFor(n*29, degrees, false);
+  frontLeft.spinFor(n*29, degrees, false);
+  backLeft.spinFor(n*29, degrees);
+}
+void moveInches(double n1, double n2) {
+  frontRight.spinFor(n2*29, degrees, false);
+  backRight.spinFor(n2*29, degrees, false);
+  frontLeft.spinFor(n1*29, degrees, false);
+  backLeft.spinFor(n1*29, degrees);
 }
 
 // Ramp movement
@@ -175,65 +187,22 @@ void pre_auton() {
 }
 
 void autonomous() {
-  /* Variables for movement
-  // Changes depending on wheel size
-  float tile = 2.32;
+  // Auton variables
+  double tile = 23;
+  double robotLength = 12.5;
+  double bonerLength = 8;
 
-  // Prepare robot for auton (lift ramp)
-  // Sleeps are useful to prevent motors overheating and to separate the robot's actions
-  // Do not question baseVelocity at the beginning
-  baseVelocity(30);
-  arms.setVelocity(90, pct);
-  armsUp();
-  task::sleep(2500);
-  armsDown();
-  task::sleep(2000);
-  arms.stop();
+  // Set base velocity
+  baseVelocity(10);
 
-  // Get four blocks and return
-  intake(100);
-  moveTurns(2.8);
-  task::sleep(100);
-  intake(50);
-
-  // Go back to the original position
-  moveTurns(-1.4);
-  task::sleep(500);
-
-  // Turning
-  // FOR RED (a, -b) | FOR BLUE (-a, b) 
-  moveTurns(-2, 2);
-  task::sleep(500);
-
-  // Go towards goal to place blocks
-  moveTurns(tile*1.5);
-  task::sleep(500);
-
-  // Activate ramp slowly
-  ramp.setVelocity(20, pct);
-  rampUp();
+  // Move until wheels open
+  moveInches(bonerLength);
+  
   task::sleep(1000);
-  outtake(20);
 
-  // Go back to original position
-  moveTurns(-tile);
+  moveInches(tile-bonerLength);
 
-  // Final Sleep
-  vex::task::sleep(500);
-
-  // CONTINUE WHEN PREVIOUS CODE WORKS!!!!!!!!!*/
-
-  baseVelocity(40);
-  moveTurns(-1.5);
-  vex::task::sleep(100);
-  moveTurns(-1.5,1.5);
-  vex::task::sleep(100);
-  moveTurns(1.5);
-
-  vex::task::sleep(100);
-
-  armsUp();
-  vex::task::sleep(1000);
+  baseVelocity(speedBase);
 }
 
 // Used to know when a button starts being pressed
