@@ -67,7 +67,7 @@ void setup() {
     for (color c : filterColors) {
       m = min(m, colorDist(col, c));
     }
-    if (m > 20) {
+    if (m > 10) {
       filterColors.append(col);
     }
   }
