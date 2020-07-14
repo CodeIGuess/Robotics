@@ -1,10 +1,10 @@
 # Official University Gardens High School, PR, Robotics Team
 
 
-## Current VEX Season →
+## Current VEX Season
 * [2020-2021 | Change Up](https://www.vexrobotics.com/vexedr/competition/vrc-current-game)
 
-## Current Authors →
+## Current Authors
 * [jpVinnie](https://github.com/jpVinnie)
 * [CodeIGuess](https://github.com/CodeIGuess)
 * [Camto](https://github.com/Camto)
