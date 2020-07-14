@@ -1,4 +1,4 @@
-# University Gardens High School Robotics Team
+   # University Gardens High School Robotics Team
 <p align="center">
   <img src="./Data/school.jpeg" alt="School Logo" />
 </p>
