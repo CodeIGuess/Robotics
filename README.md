@@ -9,5 +9,6 @@
 * [CodeIGuess](https://github.com/CodeIGuess)
 * [Camto](https://github.com/Camto)
 
-**All code is written entirely by the authors above and any questions or suggestions are gladly welcome. 
-_Not just about VEX, but Arduino projects as well_**
+**All code is written entirely by the authors above and any questions or suggestions are gladly welcome.**
+
+**_Not just about VEX, but Arduino projects as well_**
