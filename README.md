@@ -1,4 +1,5 @@
-# Official University Gardens High School, PR, Robotics Team
+# Official University Gardens High School, PR 
+# Robotics Team
 ![School Logo](./Data/school.jpeg)
 
 ## Current VEX Season
