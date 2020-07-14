@@ -1,5 +1,5 @@
 # Official University Gardens High School, PR, Robotics Team
-
+![School Logo](./Data/school.jpg)
 
 ## Current VEX Season
 * [2020-2021 | Change Up](https://www.vexrobotics.com/vexedr/competition/vrc-current-game)
