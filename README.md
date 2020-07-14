@@ -1,11 +1,12 @@
-Offcial UGHS Robotics Team Code
+# Offcial UGHS Robotics Team Code
 
---- FOR TEAM USE ONLY ---
 
-Season: 2019-2020
+## Current Season >> 
+    2020-2021 | Change Up
 
-Game: Tower Takeover
+## Current Authors >>
+* [jpVinnie](https://github.com/jpVinnie)
+* [CodeIGuess](https://github.com/CodeIGuess)
+* [Camto](https://github.com/Camto)
 
-Current Authors:
-
-CodeIGuess | Camto | jpVinnie
+**All code is written entirely by the authors above and any questions or suggestions are gladly welcome.**
