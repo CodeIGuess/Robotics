@@ -37,3 +37,4 @@ void loop() {
 float microsecondsToInches(float microseconds) {
   return microseconds / 74 / 2;
 }
+
