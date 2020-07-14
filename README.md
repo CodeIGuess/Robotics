@@ -1,8 +1,8 @@
-# Offcial UGHS Robotics Team Code
+# Official University Gardens High School, PR, Robotics Team
 
 
 ## Current Season >> 
-    2020-2021 | Change Up
+* [2020-2021 | Change Up](https://www.vexrobotics.com/vexedr/competition/vrc-current-game)
 
 ## Current Authors >>
 * [jpVinnie](https://github.com/jpVinnie)
